@@ -14,10 +14,13 @@ export const CancelledHeader = 'Cancelled';
 export const DriverReceivedHeader = 'Driver Received';
 export const DeliveredHeader = 'Delivered';
 
-// User timestamp
-export const UserTimestampHeader = 'User send time:';
+// Card property names
+export const Status = "Status";
+export const OrderNumber = "Order #";
+export const OrderName = "Order Name";
+export const Destination = "Destination";
+export const UserTimestampHeader = 'Update sent at';
 export const UserTimestampUnit = 'sec';
 
-// Card buttons
-export const Completed = "Done";
-export const Cancel = "Cancel";
+// Card actions
+export const Edit = "Edit";

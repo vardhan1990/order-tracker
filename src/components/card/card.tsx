@@ -63,10 +63,17 @@ export class Card extends React.Component<
     private getContent = () => {
         return (
             <Flex column gap="gap.small" vAlign="stretch" space="between">
-                <Header color="brand" as="h2">Order #{this.props.id}</Header>
-                <Text content={this.props.name} />
-                <Text content={this.props.destination} />
-                {this.getActionButtons()}
+                <Flex>
+                    <Flex.Item>
+                        <Header color="brand" as="h3">{constants.OrderNumber + this.props.id}</Header>
+                    </Flex.Item>
+                    <Flex.Item push>
+                        {this.getActions()}
+                    </Flex.Item>
+                </Flex>
+                <Text content={constants.OrderName + ': ' + this.props.name} />
+                <Text content={constants.Destination + ': ' + this.props.destination} />
+                {this.getStatus()}
                 <Flex.Item push>
                     <Text>{constants.UserTimestampHeader} {this.props.sent_at_second}{constants.UserTimestampUnit}</Text>
                 </Flex.Item>
@@ -74,21 +81,11 @@ export class Card extends React.Component<
         );
     }
 
-    private getActionButtons = () => {
-        if(!this.isActiveOrder()) {
-            return undefined;
-        }
-
-        return (
-            <Flex gap="gap.small">
-                <Button icon="stardust-checkmark" content={constants.Completed} primary />
-                <Button icon="stardust-close" content={constants.Cancel} />
-            </Flex>
-        );
+    private getStatus = () => {
+        return <Text content={constants.Status + ': ' + this.props.event_name} />;
     }
 
-    private isActiveOrder() {
-        const { event_name } = this.props;
-        return event_name === constants.CreatedEventName || event_name === constants.CookedEventName || event_name === constants.DriverReceivedEventName;
+    private getActions = () => {
+        return <Button iconOnly text icon="edit" />;
     }
 }
