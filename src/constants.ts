@@ -17,3 +17,7 @@ export const DeliveredHeader = 'Delivered';
 // User timestamp
 export const UserTimestampHeader = 'User send time:';
 export const UserTimestampUnit = 'sec';
+
+// Card buttons
+export const Completed = "Done";
+export const Cancel = "Cancel";

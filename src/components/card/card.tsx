@@ -81,8 +81,8 @@ export class Card extends React.Component<
 
         return (
             <Flex gap="gap.small">
-                <Button icon="stardust-checkmark" content="Done" />
-                <Button icon="stardust-close" content="Cancel" />
+                <Button icon="stardust-checkmark" content={constants.Completed} primary />
+                <Button icon="stardust-close" content={constants.Cancel} />
             </Flex>
         );
     }
