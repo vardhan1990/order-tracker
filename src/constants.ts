@@ -1,5 +1,6 @@
 // App
 export const AppTitle = "Order Tracker";
+export const ClockHeader = "Clock";
 
 // Filter
 export const FilterPrefix = "Filter to cards that were updated in the last";
