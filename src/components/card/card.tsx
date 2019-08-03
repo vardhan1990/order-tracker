@@ -41,7 +41,7 @@ export class Card extends React.Component<
                     {this.getImage()}
                 </Flex.Item>
                 <Flex.Item grow hAlign="center" vAlign="center">
-                    <Header align="center" color="brand" as="h1">{constants.OrderNumber + this.props.id}</Header>
+                    <Header align="center" color="brand" as="h2">{constants.OrderNumber + this.props.id}</Header>
                 </Flex.Item>
                 <Flex.Item push>
                     {this.getActions()}
@@ -79,9 +79,9 @@ export class Card extends React.Component<
     private getContent = () => {
         return (
             <Flex column gap="gap.small" vAlign="stretch" space="between">
-                <Text content={constants.OrderName + ': ' + this.props.name} />
-                <Text content={constants.Destination + ': ' + this.props.destination} />
-                {this.getStatus()}
+                <Text truncated content={constants.OrderName + ': ' + this.props.name} />
+                <Text truncated content={constants.Destination + ': ' + this.props.destination} />
+                <Text content={constants.Status + ': ' + this.props.event_name} />
                 <Flex.Item push>
                     <div>
                         <Text timestamp>
@@ -93,10 +93,6 @@ export class Card extends React.Component<
                 </Flex.Item>
             </Flex>
         );
-    }
-
-    private getStatus = () => {
-        return <Text content={constants.Status + ': ' + this.props.event_name} />;
     }
 
     private getActions = () => {
