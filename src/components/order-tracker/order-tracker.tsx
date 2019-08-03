@@ -1,7 +1,7 @@
 import React from 'react';
-import { Cards, ICardsProps } from '../cards/cards';
+import { Cards } from '../cards/cards';
 import { ICardProps } from '../card/card';
-import { Accordion, Button, Flex, Header, Input } from '@stardust-ui/react';
+import { Accordion, Button, Form, Header } from '@stardust-ui/react';
 import * as constants from '../../constants';
 import * as _ from 'lodash';
 
@@ -56,13 +56,40 @@ export class OrderTracker extends React.Component<
   }
 
   private getFilters = () => {
+    const fields = [
+      {
+        label: constants.FilterLabel,
+        name: 'filter-value',
+        id: 'filter-value',
+        key: 'filter-value',
+        inline: true,
+        type: 'number'
+      },
+      {
+        control: {
+          as: Button,
+          content: constants.FilterButton,
+        },
+        key: 'filter',
+        inline: true
+      },
+    ];
+
+    const onSubmit = (e: any) => {
+      const filterValueEntered = parseInt(new FormData(e.target).get('filter-value') as string);
+      this.setState({
+        filterDuration: filterValueEntered ? filterValueEntered as number : -1
+      });
+    };
+
     return (
-      <Flex column>
-        <Flex gap="gap.medium" vAlign="center">
-          <Header as="h4">{constants.FilterPrefix} <Input type="number" clearable inline placeholder="Enter a number" /> {constants.FilterSuffix}</Header> 
-          <Button iconOnly size="small" icon="stardust-checkmark" primary onClick={() => this.setState({ filterDuration: 100 }) }/>
-        </Flex>
-      </Flex>
+      <div>
+        <Header as="h2">{constants.FiltersHeader}</Header>
+        <Form
+          onSubmit={onSubmit.bind(this)}
+          fields={fields}
+        />
+       </div>
     );
   };
 

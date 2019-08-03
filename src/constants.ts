@@ -3,8 +3,10 @@ export const AppTitle = "Order Tracker";
 export const ClockHeader = "Clock";
 
 // Filter
-export const FilterPrefix = "Show cards that were updated in the last";
-export const FilterSuffix = "seconds";
+export const FilterPlaceholder = "Enter duration (in seconds)";
+export const FilterLabel = "Show cards updated in this duration only";
+export const FilterButton = "Filter";
+export const FiltersHeader = "Filters";
 
 // Event Names
 export type EventNameType = 'CREATED'| 'COOKED' | 'CANCELLED' | 'DRIVER_RECEIVED' | 'DELIVERED';
