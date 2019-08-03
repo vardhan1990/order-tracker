@@ -23,9 +23,9 @@ export class Card extends React.Component<
 > {
     public render() {
         return (
-            <Flex id='card' gap="gap.medium" padding="padding.medium">
-                <Flex.Item size="size.medium">
-                    {this.getImage()}
+            <Flex id='card' column gap="gap.medium" padding="padding.medium">
+                <Flex.Item>
+                    {this.getHeader()}
                 </Flex.Item>
                 <Flex.Item grow>
                     {this.getContent()}
@@ -33,6 +33,22 @@ export class Card extends React.Component<
             </Flex>
         );
     }
+
+    private getHeader = () => {
+        return (
+            <Flex vAlign="start" hAlign="start" gap="gap.large">
+                <Flex.Item>
+                    {this.getImage()}
+                </Flex.Item>
+                <Flex.Item grow hAlign="center" vAlign="center">
+                    <Header align="center" color="brand" as="h1">{constants.OrderNumber + this.props.id}</Header>
+                </Flex.Item>
+                <Flex.Item push>
+                    {this.getActions()}
+                </Flex.Item>
+            </Flex>
+        );
+    };
 
     private getImage = () => {
         const { event_name } = this.props;
@@ -57,25 +73,23 @@ export class Card extends React.Component<
                 image = OrderTrackerIcon;
                 break;
         }
-        return <Image id="image" fluid src={image} />
+        return <Image id="image" src={image} />
     }
 
     private getContent = () => {
         return (
             <Flex column gap="gap.small" vAlign="stretch" space="between">
-                <Flex>
-                    <Flex.Item>
-                        <Header color="brand" as="h3">{constants.OrderNumber + this.props.id}</Header>
-                    </Flex.Item>
-                    <Flex.Item push>
-                        {this.getActions()}
-                    </Flex.Item>
-                </Flex>
                 <Text content={constants.OrderName + ': ' + this.props.name} />
                 <Text content={constants.Destination + ': ' + this.props.destination} />
                 {this.getStatus()}
                 <Flex.Item push>
-                    <Text>{constants.UserTimestampHeader} {this.props.sent_at_second}{constants.UserTimestampUnit}</Text>
+                    <div>
+                        <Text timestamp>
+                            {constants.UserTimestampHeader} {this.props.sent_at_second} {constants.UserTimestampUnit}.
+                            <br />
+                            {constants.ReceivedTimestampHeader} 0 {constants.UserTimestampUnit}.
+                        </Text>
+                    </div>
                 </Flex.Item>
             </Flex>
         );

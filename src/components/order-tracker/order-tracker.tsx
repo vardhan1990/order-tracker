@@ -1,9 +1,26 @@
 import React from 'react';
 import { Cards } from '../cards/cards';
-import { Accordion, Header } from '@stardust-ui/react';
+import { Accordion, Button, Header, Input } from '@stardust-ui/react';
 import * as constants from '../../constants';
 
 export const OrderTracker: React.FC = () => {
+  return (
+      <div>
+        {getFilters()}
+        {getPanels()}
+      </div>
+  );
+}
+
+const getFilters = () => {
+  return  (
+    <div>
+      <Header align="center" as="h4">{constants.FilterPrefix} <Input inline placeholder="<enter a number>" /> {constants.FilterSuffix} <Button iconOnly size="small" icon="table-delete" /></Header> 
+    </div>
+  );
+};
+
+const getPanels = () => {
   const panels = [
     getPanel(constants.CreatedHeader, constants.CreatedEventName),
     getPanel(constants.CookedHeader, constants.CookedEventName),
@@ -11,7 +28,7 @@ export const OrderTracker: React.FC = () => {
     getPanel(constants.CancelledHeader, constants.CancelledEventName),
     getPanel(constants.DeliveredHeader, constants.DeliveredEventName)
   ];
-  return <Accordion defaultActiveIndex={[0, 1, 2]} panels={panels} />
+  return <Accordion defaultActiveIndex={[0, 1, 2]} panels={panels} />;
 }
 
 const getPanel = (header: string, eventNameContentFilter: string) => {

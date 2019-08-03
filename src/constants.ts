@@ -1,6 +1,10 @@
 // App
 export const AppTitle = "Order Tracker";
 
+// Filter
+export const FilterPrefix = "Filter to cards that were updated in the last";
+export const FilterSuffix = "seconds.";
+
 // Event Names
 export type EventNameType = 'CREATED'| 'COOKED' | 'CANCELLED' | 'DRIVER_RECEIVED' | 'DELIVERED';
 export const CreatedEventName = 'CREATED';
@@ -20,6 +24,7 @@ export const OrderNumber = "Order #";
 export const OrderName = "Order Name";
 export const Destination = "Destination";
 export const UserTimestampHeader = 'Update sent at';
+export const ReceivedTimestampHeader = 'Update received at';
 export const UserTimestampUnit = 'sec';
 
 // Card actions
