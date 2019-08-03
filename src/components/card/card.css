@@ -1,4 +1,11 @@
 #card {
-  margin: 0 0 2rem 0;
+  margin: 0 2rem 2rem 0;
+  width: 500px;
+  height: 220px;
   background-color: white;
+}
+
+#image {
+  width: 20px;
+  height: 200px;
 }

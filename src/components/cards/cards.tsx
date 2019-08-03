@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, ICardProps } from '../card/card';
-import { Flex, themes } from '@stardust-ui/react';
+import { Flex } from '@stardust-ui/react';
 
 export interface ICardsProps {
     content: ICardProps[];
@@ -20,6 +20,6 @@ export class Cards extends React.Component<
                 </Flex.Item>
             );
         });
-        return <Flex wrap gap="gap.small" space="between" children={cards}/>;
+        return <Flex wrap children={cards}/>;
     }
 }
