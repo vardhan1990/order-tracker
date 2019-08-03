@@ -5,7 +5,6 @@ import {Timer} from './components/timer/timer';
 import { Divider, Header, Flex } from '@stardust-ui/react';
 import { AppTitle } from './constants';
 
-
 const App: React.FC = () => {
   return (
     <div id="app">
