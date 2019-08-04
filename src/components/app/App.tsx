@@ -1,14 +1,15 @@
-import React from 'react';
-import { OrderTracker } from '../order-tracker/order-tracker';
-import { Divider, Header, Flex } from '@stardust-ui/react';
 import { ICardProps } from '../card/card';
-import { emitReadyEventOnSocket } from '../../web-api/api';
-import './App.css';
 import * as constants from '../constants';
 import * as _ from 'lodash';
+import { OrderTracker } from '../order-tracker/order-tracker';
+import React from 'react';
+import { Divider, Header, Flex } from '@stardust-ui/react';
+import { emitReadyEventOnSocket } from '../../web-api/api';
+
+import './App.css';
 
 interface IAppState {
-  newCardContent: ICardProps;
+  newUpdate: ICardProps;
   timeInSeconds: number;
 }
 
@@ -19,7 +20,7 @@ export class App extends React.Component<
   constructor(state: IAppState) {
     super(state);
     this.state = {
-      newCardContent: {
+      newUpdate: {
         id: "initial",
         name: "initial",
         event_name: "CREATED",
@@ -32,14 +33,14 @@ export class App extends React.Component<
 
   public componentDidMount() {
     emitReadyEventOnSocket(
-      (newCards: any) => {
-          _.forEach(newCards, newCard =>
+      (newUpdates: any) => {
+          _.forEach(newUpdates, newUpdate =>
             this.setState({
-              newCardContent: newCard as ICardProps
+              newUpdate: newUpdate as ICardProps
             })
           );
         },
-      (timer: any) =>
+      (timer: any) => 
         this.setState({
           timeInSeconds: timer as number
         })
@@ -60,11 +61,11 @@ export class App extends React.Component<
             id="header"
             as="h1"
             color="brand"
-            content={`${constants.ClockHeader  }: ${  this.state.timeInSeconds  }${constants.TimestampUnit}`}
+            content={`${constants.ClockHeader}: ${this.state.timeInSeconds}${constants.TimestampUnit}`}
           />
         </Flex>
         <Divider color="brand" size={0}/>
-        <OrderTracker getCurrentTime={() => this.state.timeInSeconds} newCardContent={this.state.newCardContent} />
+        <OrderTracker getCurrentTime={() => this.state.timeInSeconds} newUpdate={this.state.newUpdate} />
       </div>
     );
   }

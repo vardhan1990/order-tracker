@@ -1,18 +1,14 @@
-import React from 'react';
 import { Cards } from '../cards/cards';
 import { ICardProps } from '../card/card';
-import { Accordion, Button, Form, Header, Text } from '@stardust-ui/react';
 import * as constants from '../constants';
 import * as _ from 'lodash';
-
-type getCurrentTimeFn = () => number;
+import React from 'react';
+import { Accordion, Button, Form, Header, Text } from '@stardust-ui/react';
 
 export interface IOrderTrackerProps {
-  getCurrentTime: getCurrentTimeFn;
-  newCardContent?: ICardProps;
-
+  getCurrentTime: () => number;
+  newUpdate?: ICardProps;
 }
-
 export interface IOrderTrackerState {
   filterDuration: number;
   filterMessage: string;
@@ -22,11 +18,13 @@ export class OrderTracker extends React.Component<
   IOrderTrackerProps,
   IOrderTrackerState
 > {
-  private fullContent: ICardProps[];
+  private latestStateOfAllOrdersUnfiltered: ICardProps[];
+  private allUpdatesOfAllOrdersUnfiltered: ICardProps[];
 
   constructor(props: IOrderTrackerProps, state: IOrderTrackerState) {
     super(props, state);
-    this.fullContent = [];
+    this.latestStateOfAllOrdersUnfiltered = [];
+    this.allUpdatesOfAllOrdersUnfiltered = [];
     this.state = {
       filterDuration: -1,
       filterMessage: constants.NoFilterApplied
@@ -34,21 +32,22 @@ export class OrderTracker extends React.Component<
   }
 
   public componentDidUpdate(prevProps: IOrderTrackerProps, prevState: IOrderTrackerState) {
-    const { newCardContent } = this.props;
+    const { newUpdate: newCardContent } = this.props;
 
-    if (newCardContent && prevProps.newCardContent !== newCardContent) {
-      _.remove(this.fullContent, cardContent => cardContent.id === newCardContent.id);
-      this.fullContent = _.concat(this.fullContent, [newCardContent]);
+    if (newCardContent && prevProps.newUpdate !== newCardContent) {
+      _.remove(this.latestStateOfAllOrdersUnfiltered, cardContent => cardContent.id === newCardContent.id);
+      this.latestStateOfAllOrdersUnfiltered = _.concat(this.latestStateOfAllOrdersUnfiltered, [newCardContent]);
+      this.allUpdatesOfAllOrdersUnfiltered = _.concat(this.allUpdatesOfAllOrdersUnfiltered, [newCardContent]);
     }
   }
 
   public render() {
     return (
-        <div>
-          {this.getFilters()}
-          <Text>{this.state.filterMessage}</Text>
-          {this.getPanels()}
-        </div>
+      <div>
+        {this.getFilters()}
+        <Text>{this.state.filterMessage}</Text>
+        {this.getPanels()}
+      </div>
     );
   }
 
@@ -59,12 +58,13 @@ export class OrderTracker extends React.Component<
         name: 'filter-value',
         id: 'filter-value',
         key: 'filter-value',
-        inline: true,
-        type: 'number'
+        type: 'number',
+        inline: true
       },
       {
         control: {
           as: Button,
+          key: 'filter-button',
           content: constants.FilterButton,
         },
         key: 'filter'
@@ -72,10 +72,10 @@ export class OrderTracker extends React.Component<
     ];
 
     const onSubmit = (e: any) => {
-      const filterValueEntered = parseInt(new FormData(e.target).get('filter-value') as string, 10);
-      if (filterValueEntered && filterValueEntered > 0) {
+      const filterDurationInput = parseInt(new FormData(e.target).get('filter-value') as string, 10);
+      if (filterDurationInput && filterDurationInput > 0) {
         this.setState({
-          filterDuration: filterValueEntered,
+          filterDuration: filterDurationInput,
           filterMessage: constants.FilterCurrentlyApplied
         });
       } else {
@@ -88,7 +88,7 @@ export class OrderTracker extends React.Component<
 
     return (
       <div>
-        <Header as="h2">{constants.FiltersHeader}</Header>
+        <Header as="h2" color="brand">{constants.FiltersHeader}</Header>
         <Form
           onSubmit={onSubmit.bind(this)}
           fields={fields}
@@ -97,10 +97,10 @@ export class OrderTracker extends React.Component<
     );
   };
 
-  private getContent = () => {
+  private getLatestStateOfOrdersFiltered = () => {
     const { filterDuration } = this.state;
     const currentTime: number = this.props.getCurrentTime();
-    return filterDuration < 0 ? this.fullContent : _.filter(this.fullContent,
+    return filterDuration < 0 ? this.latestStateOfAllOrdersUnfiltered : _.filter(this.latestStateOfAllOrdersUnfiltered,
       cardContent => (currentTime - cardContent.sent_at_second) < filterDuration);
   }
 
@@ -127,7 +127,9 @@ export class OrderTracker extends React.Component<
   }
 
   private getCards = (eventNameContentFilter: string) => {
-    return (<Cards content={this.getContent().filter(
-      cardContent => cardContent.event_name === eventNameContentFilter)}/>);
+    return (
+      <Cards content={this.getLatestStateOfOrdersFiltered().filter(
+        cardContent => cardContent.event_name === eventNameContentFilter)} />
+    );
   }
 }
