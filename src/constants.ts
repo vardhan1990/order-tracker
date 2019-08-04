@@ -3,8 +3,7 @@ export const AppTitle = "Order Tracker";
 export const ClockHeader = "Clock";
 
 // Filter
-export const FilterPlaceholder = "Enter duration (in seconds)";
-export const FilterLabel = "Show cards updated in this duration only";
+export const FilterLabel = "Show cards updated in this duration only (enter duration in seconds, and clear box to reset)";
 export const FilterButton = "Filter";
 export const FiltersHeader = "Filters";
 
