@@ -68,7 +68,14 @@
         }
       ],
       "@typescript-eslint/prefer-namespace-keyword": "error",
-      "import/no-unassigned-import": "warn",
+      "import/no-unassigned-import": [ 
+        "error", 
+        {
+            "allow": [
+                "**/*.css"
+            ]
+        } 
+      ],
       "import/no-extraneous-dependencies": "error",
       "security/detect-pseudoRandomBytes": "error",
       "@typescript-eslint/no-inferrable-types": [
