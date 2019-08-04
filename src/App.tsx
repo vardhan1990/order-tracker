@@ -37,7 +37,7 @@ export class App extends React.Component<
       if (i === content.length) {
         i=0;
       }
-    }, 5000);
+    }, 1000);
   }
 
   public render() {

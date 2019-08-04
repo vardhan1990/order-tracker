@@ -90,7 +90,7 @@ export class OrderTracker extends React.Component<
   private getContent = () => {
     const { filterDuration } = this.state;
     const currentTime: number = this.props.getCurrentTime();
-    return filterDuration < 0 ? this.fullContent : _.filter(this.fullContent, cardContent => currentTime - cardContent.sent_at_second > 0);
+    return filterDuration < 0 ? this.fullContent : _.filter(this.fullContent, cardContent => (currentTime - cardContent.sent_at_second) < filterDuration);
   }
 
   private getPanels = () => {
