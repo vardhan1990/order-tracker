@@ -30,5 +30,5 @@ export const OrderName = "Order Name";
 export const Destination = "Destination";
 export const UserTimestampHeader = 'Update sent at';
 
-// Card actions
-export const Edit = "Edit";
+// Actions
+export const SeeHistoryButton = "View Order History";
