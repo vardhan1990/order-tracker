@@ -83,13 +83,9 @@ export class Card extends React.Component<
                 <Text truncated content={constants.Destination + ': ' + this.props.destination} />
                 <Text content={constants.Status + ': ' + this.props.event_name} />
                 <Flex.Item push>
-                    <div>
-                        <Text timestamp>
-                            {constants.UserTimestampHeader} {this.props.sent_at_second} {constants.UserTimestampUnit}.
-                            <br />
-                            {constants.ReceivedTimestampHeader} 0 {constants.UserTimestampUnit}.
-                        </Text>
-                    </div>
+                    <Text timestamp>
+                        {constants.UserTimestampHeader} {this.props.sent_at_second} {constants.TimestampUnit}.
+                    </Text>
                 </Flex.Item>
             </Flex>
         );

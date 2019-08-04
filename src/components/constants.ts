@@ -1,6 +1,7 @@
 // App
 export const AppTitle = "Order Tracker";
 export const ClockHeader = "Clock";
+export const TimestampUnit = 's';
 
 // Filter
 export const FilterLabel = "Show cards updated in this duration only (enter duration in seconds, and clear box to reset)";
@@ -26,8 +27,6 @@ export const OrderNumber = "Order #";
 export const OrderName = "Order Name";
 export const Destination = "Destination";
 export const UserTimestampHeader = 'Update sent at';
-export const ReceivedTimestampHeader = 'Update received at';
-export const UserTimestampUnit = 's';
 
 // Card actions
 export const Edit = "Edit";
