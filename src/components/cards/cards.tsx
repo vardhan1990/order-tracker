@@ -1,9 +1,10 @@
-import { Card, ICardProps } from '../card/card';
+import { Card } from '../card/card';
 import React from 'react';
 import { Flex } from '@stardust-ui/react';
+import { IUpdate } from '../../update.interface';
 
 export interface ICardsProps {
-    content: ICardProps[];
+    content: IUpdate[];
 }
 
 export class Cards extends React.Component<

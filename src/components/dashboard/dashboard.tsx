@@ -1,14 +1,14 @@
 import { Cards } from '../cards/cards';
-import { ICardProps } from '../card/card';
 import * as constants from '../constants';
 import { History } from '../history/history';
 import * as _ from 'lodash';
 import React from 'react';
 import { Accordion, Button, Flex, Header, Input, Text } from '@stardust-ui/react';
+import { IUpdate } from '../../update.interface';
 
 export interface IDashboardProps {
   getCurrentTime: () => number;
-  newUpdate?: ICardProps;
+  newUpdate?: IUpdate;
 }
 export interface IDashboardState {
   filterDurationInput: string;
@@ -21,8 +21,8 @@ export class Dashboard extends React.Component<
   IDashboardProps,
   IDashboardState
 > {
-  private latestStateOfAllOrdersUnfiltered: ICardProps[];
-  private allUpdatesOfAllOrdersUnfiltered: ICardProps[];
+  private latestStateOfAllOrdersUnfiltered: IUpdate[];
+  private allUpdatesOfAllOrdersUnfiltered: IUpdate[];
 
   constructor(props: IDashboardProps, state: IDashboardState) {
     super(props, state);

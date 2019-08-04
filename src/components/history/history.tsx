@@ -1,8 +1,8 @@
-import { ICardProps } from '../card/card';
 import * as constants from '../constants';
 import * as _ from 'lodash';
 import React from 'react';
 import { Button, Dialog, Header, Image, Flex, Text } from '@stardust-ui/react';
+import { IUpdate } from '../../update.interface';
 
 import CreatedIcon from '../../assets/created.png';
 import CookedIcon from '../../assets/cooked.png';
@@ -12,7 +12,7 @@ import DriverReceivedIcon from '../../assets/driver_received.png';
 import OrderTrackerIcon from '../../assets/order_tracker_icon.png';
 
 export interface IHistoryProps {
-    allUpdatesOfAllOrdersUnfiltered: ICardProps[];
+    allUpdatesOfAllOrdersUnfiltered: IUpdate[];
     id: string;
 }
 
@@ -53,12 +53,13 @@ export class History extends React.Component <
         <div>
             <Header color="brand">{constants.OrderNumber}{id}</Header>
             <Text>{constants.OrderName}: {name}</Text>
+            <br />
             <Text>{constants.Destination}: {destination}</Text>
         </div>
        );
    }
 
-   private getUpdatesTimeline = (historyOrdered: ICardProps[]) => {
+   private getUpdatesTimeline = (historyOrdered: IUpdate[]) => {
     const events: JSX.Element[] = [];
     _.forEach(historyOrdered, event => {
         events.push(

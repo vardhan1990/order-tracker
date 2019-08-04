@@ -6,16 +6,11 @@ import CancelledIcon from '../../assets/cancelled.png';
 import DeliveredIcon from '../../assets/delivered.png';
 import DriverReceivedIcon from '../../assets/driver_received.png';
 import OrderTrackerIcon from '../../assets/order_tracker_icon.png';
-import { Button, Flex, Header, Image, Text } from '@stardust-ui/react';
 import * as constants from '../constants';
+import { Button, Flex, Header, Image, Text } from '@stardust-ui/react';
+import { IUpdate } from '../../update.interface';
 
-export interface ICardProps {
-    id: string;
-    name: string;
-    event_name: constants.EventNameType;
-    sent_at_second: number;
-    destination: string;
-}
+export interface ICardProps extends IUpdate {}
 
 export class Card extends React.Component<
   ICardProps,

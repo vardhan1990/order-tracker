@@ -1,4 +1,4 @@
-import { ICardProps } from '../card/card';
+import { IUpdate } from '../../update.interface';
 import * as constants from '../constants';
 import * as _ from 'lodash';
 import { Dashboard } from '../dashboard/dashboard';
@@ -9,7 +9,7 @@ import { emitReadyEventOnSocket } from '../../web-api/api';
 import './App.css';
 
 interface IAppState {
-  newUpdate: ICardProps;
+  newUpdate: IUpdate;
   timeInSeconds: number;
 }
 
@@ -36,7 +36,7 @@ export class App extends React.Component<
       (newUpdates: any) => {
           _.forEach(newUpdates, newUpdate =>
             this.setState({
-              newUpdate: newUpdate as ICardProps
+              newUpdate: newUpdate as IUpdate
             })
           );
         },
