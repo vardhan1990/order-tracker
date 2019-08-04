@@ -1,7 +1,7 @@
 import React from 'react';
 import { Cards } from '../cards/cards';
 import { ICardProps } from '../card/card';
-import { Accordion, Button, Form, Header } from '@stardust-ui/react';
+import { Accordion, Button, Form, Header, Text } from '@stardust-ui/react';
 import * as constants from '../constants';
 import * as _ from 'lodash';
 
@@ -15,6 +15,7 @@ export interface IOrderTrackerProps {
 
 export interface IOrderTrackerState {
   filterDuration: number;
+  filterMessage: string;
 }
 
 export class OrderTracker extends React.Component<
@@ -27,7 +28,8 @@ export class OrderTracker extends React.Component<
     super(props, state);
     this.fullContent = [];
     this.state = {
-      filterDuration: -1
+      filterDuration: -1,
+      filterMessage: constants.NoFilterApplied
     };
   }
 
@@ -44,6 +46,7 @@ export class OrderTracker extends React.Component<
     return (
         <div>
           {this.getFilters()}
+          <Text>{this.state.filterMessage}</Text>
           {this.getPanels()}
         </div>
     );
@@ -64,16 +67,23 @@ export class OrderTracker extends React.Component<
           as: Button,
           content: constants.FilterButton,
         },
-        key: 'filter',
-        inline: true
+        key: 'filter'
       },
     ];
 
     const onSubmit = (e: any) => {
       const filterValueEntered = parseInt(new FormData(e.target).get('filter-value') as string);
-      this.setState({
-        filterDuration: filterValueEntered ? filterValueEntered as number : -1
-      });
+      if (filterValueEntered && filterValueEntered > 0) {
+        this.setState({
+          filterDuration: filterValueEntered,
+          filterMessage: constants.FilterCurrentlyApplied
+        });
+      } else {
+        this.setState({
+          filterDuration: -1,
+          filterMessage: constants.NoFilterApplied
+        });
+      }
     };
 
     return (

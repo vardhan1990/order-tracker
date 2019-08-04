@@ -7,6 +7,8 @@ export const TimestampUnit = 's';
 export const FilterLabel = "Show cards updated in this duration only (enter duration in seconds, and clear box to reset)";
 export const FilterButton = "Filter";
 export const FiltersHeader = "Filters";
+export const NoFilterApplied = "No filter currently applied";
+export const FilterCurrentlyApplied = "Filter currently applied";
 
 // Event Names
 export type EventNameType = 'CREATED'| 'COOKED' | 'CANCELLED' | 'DRIVER_RECEIVED' | 'DELIVERED';
