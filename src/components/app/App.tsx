@@ -6,6 +6,7 @@ import { AppTitle } from '../constants';
 import { ICardProps } from '../card/card';
 import { emitReadyEventOnSocket } from '../../web-api/api';
 import * as constants from '../constants';
+import * as _ from 'lodash';
 
 interface IAppState {
   newCardContent: ICardProps;
@@ -32,10 +33,13 @@ export class App extends React.Component<
 
   public componentDidMount() {
     emitReadyEventOnSocket(
-      (newCardContent: any) => 
-        this.setState({
-          newCardContent: newCardContent as ICardProps
-        }),
+      (newCards: any) => {
+          _.forEach(newCards, newCard => 
+            this.setState({
+              newCardContent: newCard as ICardProps
+            })
+          )
+        },
       (timer: any) => 
         this.setState({
           timeInSeconds: timer as number
