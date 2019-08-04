@@ -5,6 +5,7 @@ import {Clock} from '../clock/clock';
 import { Divider, Header, Flex } from '@stardust-ui/react';
 import { AppTitle } from '../constants';
 import { ICardProps } from '../card/card';
+import { emitReadyEventOnSocket } from '../../web-api/api';
 
 interface IAppState {
   newCardContent: ICardProps;
@@ -14,8 +15,6 @@ export class App extends React.Component<
   {},
   IAppState
 > {
-  private interval!: NodeJS.Timeout;
-
   constructor(state: IAppState) {
     super(state);
     this.state = {
@@ -30,14 +29,11 @@ export class App extends React.Component<
   }
 
   public componentDidMount() {
-    const content = this.getMockContent();
-    let i=0;
-    this.interval = setInterval(() => {
-      this.setState({ newCardContent: content[i++] as ICardProps });
-      if (i === content.length) {
-        i=0;
-      }
-    }, 1000);
+    emitReadyEventOnSocket((newCardContent: any) => 
+      this.setState({
+        newCardContent: newCardContent as ICardProps
+      })
+    );
   }
 
   public render() {
@@ -57,43 +53,39 @@ export class App extends React.Component<
       </div>
     );
   }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
   
-  private getMockContent = () => {
-    return [
-      {
-        id: "01",
-        name: "Cheese Pizza",
-        event_name: "CREATED",
-        sent_at_second: 1,
-        destination: "1041 S Fairfax Ave, LA, CA 90019"
-      },
-      {
-        id: "01",
-        name: "Cheese Pizza",
-        event_name: "COOKED",
-        sent_at_second: 1,
-        destination: "1041 S Fairfax Ave, LA, CA 90019"
-      },
-      {
-        id: "01",
-        name: "Cheese Pizza",
-        event_name: "DRIVER_RECEIVED",
-        sent_at_second: 1,
-        destination: "1041 S Fairfax Ave, LA, CA 90019"
-      },
-      {
-        id: "01",
-        name: "Cheese Pizza",
-        event_name: "DELIVERED",
-        sent_at_second: 1,
-        destination: "1041 S Fairfax Ave, LA, CA 90019"
-      }
-    ];
-  }
+  // private getMockContent = () => {
+  //   return [
+  //     {
+  //       id: "01",
+  //       name: "Cheese Pizza",
+  //       event_name: "CREATED",
+  //       sent_at_second: 1,
+  //       destination: "1041 S Fairfax Ave, LA, CA 90019"
+  //     },
+  //     {
+  //       id: "01",
+  //       name: "Cheese Pizza",
+  //       event_name: "COOKED",
+  //       sent_at_second: 1,
+  //       destination: "1041 S Fairfax Ave, LA, CA 90019"
+  //     },
+  //     {
+  //       id: "01",
+  //       name: "Cheese Pizza",
+  //       event_name: "DRIVER_RECEIVED",
+  //       sent_at_second: 1,
+  //       destination: "1041 S Fairfax Ave, LA, CA 90019"
+  //     },
+  //     {
+  //       id: "01",
+  //       name: "Cheese Pizza",
+  //       event_name: "DELIVERED",
+  //       sent_at_second: 1,
+  //       destination: "1041 S Fairfax Ave, LA, CA 90019"
+  //     }
+  //   ];
+  // }
 }
 
 export default App;
