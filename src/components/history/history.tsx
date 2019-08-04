@@ -21,10 +21,11 @@ export class History extends React.Component <
   {}
 > {
    public render() {
-        return <Dialog content={this.getDialogContent()} trigger={<Button content={constants.SeeHistoryButton} />} />;
+        return <Dialog content={this.getDialog()} trigger={<Button content={constants.ViewOrderHistory} />} />;
    } 
 
-   private getDialogContent = () => {
+   
+   private getDialog = () => {
     const events: JSX.Element[] = [];
     const orderHistory = _.filter(this.props.allUpdatesOfAllOrdersUnfiltered, update => update.id === this.props.id);
     const content = _.orderBy(orderHistory, 'sent_at_second', 'asc');
@@ -40,17 +41,25 @@ export class History extends React.Component <
         events.push(<br/>);
     });
 
-    const { id, name, destination } = content[0];
+    if (content.length > 0) {
+        const { id, name, destination } = content[0];
+        return (
+            <Flex column>
+                <Header color="brand">{constants.OrderNumber}{id}</Header>
+                <Text>{constants.OrderName}: {name}</Text>
+                <Text>{constants.Destination}: {destination}</Text>
+                <br/>
+                {events}
+            </Flex>
+        );
+    }
+
     return (
-        <Flex column>
-            <Header color="brand">{constants.OrderNumber}{id}</Header>
-            <Text>{constants.OrderName}: {name}</Text>
-            <Text>{constants.Destination}: {destination}</Text>
-            <br/>
-            {events}
-        </Flex>
+        <Text>
+            No history found.
+        </Text>
     );
-   }
+   };
 
     private getFriendlyString = (event_name: string) => {
         switch(event_name) {

@@ -1,17 +1,20 @@
 import { Cards } from '../cards/cards';
 import { ICardProps } from '../card/card';
 import * as constants from '../constants';
+import { History } from '../history/history';
 import * as _ from 'lodash';
 import React from 'react';
-import { Accordion, Button, Form, Header, Text } from '@stardust-ui/react';
+import { Accordion, Button, Flex, Form, Header, Input, Text } from '@stardust-ui/react';
 
 export interface IOrderTrackerProps {
   getCurrentTime: () => number;
   newUpdate?: ICardProps;
 }
 export interface IOrderTrackerState {
+  filterDurationInput: string;
   filterDuration: number;
   filterMessage: string;
+  viewHistoryId: string;
 }
 
 export class OrderTracker extends React.Component<
@@ -26,8 +29,10 @@ export class OrderTracker extends React.Component<
     this.latestStateOfAllOrdersUnfiltered = [];
     this.allUpdatesOfAllOrdersUnfiltered = [];
     this.state = {
+      filterDurationInput: "",
       filterDuration: -1,
-      filterMessage: constants.NoFilterApplied
+      filterMessage: constants.NoFilterApplied,
+      viewHistoryId: ""
     };
   }
 
@@ -43,59 +48,73 @@ export class OrderTracker extends React.Component<
 
   public render() {
     return (
-      <div>
-        {this.getFilters()}
-        <Text>{this.state.filterMessage}</Text>
+      <Flex column>
+        <Flex>
+          <Flex.Item size="size.half">
+              {this.getFilters()}
+          </Flex.Item>
+          <Flex.Item size="size.half">
+            {this.getViewHistorySection()}
+          </Flex.Item>
+        </Flex>
         {this.getPanels()}
-      </div>
+      </Flex>
+    );
+  }
+
+  private getViewHistorySection = () => {
+    return (
+      <Flex column hAlign="center" vAlign="center" gap="gap.small">
+        <Header as="h3" color="brand">{constants.ViewOrderHistory}</Header>
+        <Header as="h4">{constants.ViewOrderHistoryDescription}</Header>
+        <Header as="span">{constants.ViewOrderHistoryPrompt}</Header>
+        <Flex>
+          <Input id="view-history-id" type="string" value={this.state.viewHistoryId} onChange={e => {
+              this.setState({
+                viewHistoryId: (e.target as any).value as string
+              });
+              }
+            }/>
+          <History allUpdatesOfAllOrdersUnfiltered={this.allUpdatesOfAllOrdersUnfiltered} id={this.state.viewHistoryId} />
+        </Flex>
+      </Flex>
     );
   }
 
   private getFilters = () => {
-    const fields = [
-      {
-        label: constants.FilterLabel,
-        name: 'filter-value',
-        id: 'filter-value',
-        key: 'filter-value',
-        type: 'number',
-        inline: true
-      },
-      {
-        control: {
-          as: Button,
-          key: 'filter-button',
-          content: constants.FilterButton,
-        },
-        key: 'filter'
-      },
-    ];
-
-    const onSubmit = (e: any) => {
-      const filterDurationInput = parseInt(new FormData(e.target).get('filter-value') as string, 10);
-      if (filterDurationInput && filterDurationInput > 0) {
-        this.setState({
-          filterDuration: filterDurationInput,
-          filterMessage: constants.FilterCurrentlyApplied
-        });
-      } else {
-        this.setState({
-          filterDuration: -1,
-          filterMessage: constants.NoFilterApplied
-        });
-      }
-    };
-
     return (
-      <div>
-        <Header as="h2" color="brand">{constants.FiltersHeader}</Header>
-        <Form
-          onSubmit={onSubmit.bind(this)}
-          fields={fields}
-        />
-       </div>
+      <Flex column hAlign="center" vAlign="center" gap="gap.small">
+        <Header as="h3" color="brand">{constants.FiltersHeader}</Header>
+        <Header as="h4">{constants.FiltersHeaderDescription}</Header>
+        <Header as="span">{constants.FiltersHeaderPrompt}</Header>
+        <Flex>
+          <Input id="filter-value" type="number" value={this.state.filterDurationInput} onChange={e => {
+                let inputValue = (e.target as any).value as string
+                this.setState({
+                  filterDurationInput: inputValue
+                });
+              }
+            }/>
+          <Button content={constants.FilterButton} onClick={() => {
+              const filterDurationInputNum = parseInt(this.state.filterDurationInput);
+              if (filterDurationInputNum && filterDurationInputNum > 0) {
+                this.setState({
+                  filterDuration: filterDurationInputNum,
+                  filterMessage: constants.FilterCurrentlyApplied
+                });
+              } else {
+                this.setState({
+                  filterDuration: -1,
+                  filterMessage: constants.NoFilterApplied
+                });
+              }
+            }
+          }/>
+        </Flex>
+        <Text>{this.state.filterMessage}</Text>
+      </Flex>
     );
-  };
+  }
 
   private getLatestStateOfOrdersFiltered = () => {
     const { filterDuration } = this.state;

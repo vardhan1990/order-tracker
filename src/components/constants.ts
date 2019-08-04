@@ -4,9 +4,10 @@ export const ClockHeader = "Clock";
 export const TimestampUnit = 's';
 
 // Filter
-export const FilterLabel = "Show cards updated in this duration only (enter duration in seconds, and clear box to reset)";
+export const FiltersHeaderDescription = "Filter to updates within a duration";
+export const FiltersHeaderPrompt = "Enter duration (in seconds)";
 export const FilterButton = "Filter";
-export const FiltersHeader = "Filters";
+export const FiltersHeader = "Dashboard Filter";
 export const NoFilterApplied = "No filter currently applied";
 export const FilterCurrentlyApplied = "Filter currently applied";
 
@@ -31,4 +32,6 @@ export const Destination = "Destination";
 export const UserTimestampHeader = 'Update sent at';
 
 // Actions
-export const SeeHistoryButton = "View Order History";
+export const ViewOrderHistory = "View Order History";
+export const ViewOrderHistoryDescription = "View all updates for a specific order";
+export const ViewOrderHistoryPrompt = "Enter Order ID";
