@@ -15,7 +15,7 @@ const App: React.FC = () => {
           color="brand"
           content={AppTitle}
         />
-        <Clock/>
+        <Clock />
       </Flex>
       <Divider color="brand" size={0}/>
       <OrderTracker getCurrentTime={() => 200} />

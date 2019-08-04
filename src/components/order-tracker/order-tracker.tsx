@@ -9,11 +9,12 @@ type getCurrentTimeFn = () => number;
 
 export interface IOrderTrackerProps {
   getCurrentTime: getCurrentTimeFn;
+  newCardContent?: ICardProps;
+
 }
 
 export interface IOrderTrackerState {
   filterDuration: number;
-  newCardContent: ICardProps;
 }
 
 export class OrderTracker extends React.Component<
@@ -26,21 +27,14 @@ export class OrderTracker extends React.Component<
     super(props, state);
     this.fullContent = [];
     this.state = {
-      filterDuration: -1,
-      newCardContent: {
-        id: "initial",
-        name: "initial",
-        event_name: "CREATED",
-        sent_at_second: -1,
-        destination: "initial"
-      }
+      filterDuration: -1
     };
   }
 
   public componentDidUpdate(prevProps: IOrderTrackerProps, prevState: IOrderTrackerState) {
-    const { newCardContent } = this.state;
+    const { newCardContent } = this.props;
 
-    if (prevState.newCardContent !== newCardContent) {
+    if (newCardContent && prevProps.newCardContent !== newCardContent) {
       this.fullContent = _.remove(this.fullContent, cardContent => cardContent.id === newCardContent.id);
       this.fullContent = _.concat(this.fullContent, [newCardContent]);
     }
