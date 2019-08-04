@@ -2,7 +2,7 @@ import React from 'react';
 import { Cards } from '../cards/cards';
 import { ICardProps } from '../card/card';
 import { Accordion, Button, Form, Header } from '@stardust-ui/react';
-import * as constants from '../../constants';
+import * as constants from '../constants';
 import * as _ from 'lodash';
 
 type getCurrentTimeFn = () => number;

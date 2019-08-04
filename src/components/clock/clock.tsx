@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Header } from '@stardust-ui/react';
-import * as constants from '../../constants';
+import * as constants from '../constants';
 
 export interface ITimerState {
   timeInSeconds: number;

@@ -7,7 +7,7 @@ import DeliveredIcon from '../../assets/delivered.png';
 import DriverReceivedIcon from '../../assets/driver_received.png';
 import OrderTrackerIcon from '../../assets/order_tracker_icon.png';
 import { Button, Flex, Header, Image, Text } from '@stardust-ui/react';
-import * as constants from '../../constants';
+import * as constants from '../constants';
 
 export interface ICardProps {
     id: string;

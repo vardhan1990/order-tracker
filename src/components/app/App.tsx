@@ -3,7 +3,7 @@ import './App.css';
 import { OrderTracker } from '../order-tracker/order-tracker'; 
 import {Clock} from '../clock/clock';
 import { Divider, Header, Flex } from '@stardust-ui/react';
-import { AppTitle } from '../../constants';
+import { AppTitle } from '../constants';
 import { ICardProps } from '../card/card';
 
 interface IAppState {
