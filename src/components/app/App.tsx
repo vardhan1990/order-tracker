@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import { OrderTracker } from './components/order-tracker/order-tracker'; 
-import {Clock} from './components/clock/clock';
+import { OrderTracker } from '../order-tracker/order-tracker'; 
+import {Clock} from '../clock/clock';
 import { Divider, Header, Flex } from '@stardust-ui/react';
-import { AppTitle } from './constants';
-import { ICardProps } from './components/card/card';
+import { AppTitle } from '../../constants';
+import { ICardProps } from '../card/card';
 
 interface IAppState {
   newCardContent: ICardProps;
