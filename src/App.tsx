@@ -65,28 +65,28 @@ export class App extends React.Component<
   private getMockContent = () => {
     return [
       {
-        id: "TEST",
+        id: "01",
         name: "Cheese Pizza",
         event_name: "CREATED",
         sent_at_second: 1,
         destination: "1041 S Fairfax Ave, LA, CA 90019"
       },
       {
-        id: "TEST",
+        id: "01",
         name: "Cheese Pizza",
         event_name: "COOKED",
         sent_at_second: 1,
         destination: "1041 S Fairfax Ave, LA, CA 90019"
       },
       {
-        id: "TEST",
+        id: "01",
         name: "Cheese Pizza",
         event_name: "DRIVER_RECEIVED",
         sent_at_second: 1,
         destination: "1041 S Fairfax Ave, LA, CA 90019"
       },
       {
-        id: "TEST",
+        id: "01",
         name: "Cheese Pizza",
         event_name: "DELIVERED",
         sent_at_second: 1,
