@@ -40,7 +40,7 @@ export class App extends React.Component<
             })
           );
         },
-      (timer: any) => 
+      (timer: any) =>
         this.setState({
           timeInSeconds: timer as number
         })

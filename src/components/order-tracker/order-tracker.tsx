@@ -4,7 +4,7 @@ import * as constants from '../constants';
 import { History } from '../history/history';
 import * as _ from 'lodash';
 import React from 'react';
-import { Accordion, Button, Flex, Form, Header, Input, Text } from '@stardust-ui/react';
+import { Accordion, Button, Flex, Header, Input, Text } from '@stardust-ui/react';
 
 export interface IOrderTrackerProps {
   getCurrentTime: () => number;
@@ -75,7 +75,8 @@ export class OrderTracker extends React.Component<
               });
               }
             }/>
-          <History allUpdatesOfAllOrdersUnfiltered={this.allUpdatesOfAllOrdersUnfiltered} id={this.state.viewHistoryId} />
+          <History allUpdatesOfAllOrdersUnfiltered={this.allUpdatesOfAllOrdersUnfiltered}
+              id={this.state.viewHistoryId} />
         </Flex>
       </Flex>
     );
@@ -89,14 +90,14 @@ export class OrderTracker extends React.Component<
         <Header as="span">{constants.FiltersHeaderPrompt}</Header>
         <Flex>
           <Input id="filter-value" type="number" value={this.state.filterDurationInput} onChange={e => {
-                let inputValue = (e.target as any).value as string
+                const inputValue = (e.target as any).value as string;
                 this.setState({
                   filterDurationInput: inputValue
                 });
               }
             }/>
           <Button content={constants.FilterButton} onClick={() => {
-              const filterDurationInputNum = parseInt(this.state.filterDurationInput);
+              const filterDurationInputNum = parseInt(this.state.filterDurationInput, 10);
               if (filterDurationInputNum && filterDurationInputNum > 0) {
                 this.setState({
                   filterDuration: filterDurationInputNum,

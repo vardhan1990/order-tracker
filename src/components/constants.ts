@@ -23,6 +23,7 @@ export const CookedHeader = 'Cooked';
 export const CancelledHeader = 'Cancelled';
 export const DriverReceivedHeader = 'Driver Received';
 export const DeliveredHeader = 'Delivered';
+export const UnknownEventHeader = 'Unknown Event';
 
 // Card property names
 export const Status = "Status";
@@ -35,3 +36,6 @@ export const UserTimestampHeader = 'Update sent at';
 export const ViewOrderHistory = "View Order History";
 export const ViewOrderHistoryDescription = "View all updates for a specific order";
 export const ViewOrderHistoryPrompt = "Enter Order ID";
+
+// History
+export const NoHistoryFound = "No history found.";

@@ -20,46 +20,61 @@ export class History extends React.Component <
   IHistoryProps,
   {}
 > {
-   public render() {
-        return <Dialog content={this.getDialog()} trigger={<Button content={constants.ViewOrderHistory} />} />;
-   } 
 
-   
-   private getDialog = () => {
+   public render() {
+       return <Dialog content={this.getDialog()} trigger={<Button content={constants.ViewOrderHistory} />} />;
+   }
+
+    private getDialog = () => {
+        const orderHistory = _.filter(this.props.allUpdatesOfAllOrdersUnfiltered,
+            update => update.id === this.props.id);
+        const historyOrdered = _.orderBy(orderHistory, 'sent_at_second', 'asc');
+
+        if (historyOrdered.length < 1) {
+            return (
+                <Text>
+                    {constants.NoHistoryFound}
+                </Text>
+            );
+        }
+
+        const { id, name, destination } = historyOrdered[0];
+        return (
+            <Flex column>
+                {this.getHeaderAndMetadata(id, name, destination)}
+                <br/>
+                {this.getUpdatesTimeline(historyOrdered)}
+            </Flex>
+        );
+    };
+
+   private getHeaderAndMetadata = (id: string, name: string, destination: string) => {
+       return (
+        <div>
+            <Header color="brand">{constants.OrderNumber}{id}</Header>
+            <Text>{constants.OrderName}: {name}</Text>
+            <Text>{constants.Destination}: {destination}</Text>
+        </div>
+       );
+   }
+
+   private getUpdatesTimeline = (historyOrdered: ICardProps[]) => {
     const events: JSX.Element[] = [];
-    const orderHistory = _.filter(this.props.allUpdatesOfAllOrdersUnfiltered, update => update.id === this.props.id);
-    const content = _.orderBy(orderHistory, 'sent_at_second', 'asc');
-    _.forEach(content, event => {
+    _.forEach(historyOrdered, event => {
         events.push(
-            <Flex.Item hAlign="center" vAlign="center">
-                <Flex hAlign="center" vAlign="center">
-                    {this.getImage(event.event_name)} 
-                    <Text>  {this.getFriendlyString(event.event_name)} at {event.sent_at_second}{constants.TimestampUnit}</Text>
-                </Flex>
-            </Flex.Item>
+          <Flex.Item hAlign="center" vAlign="center">
+              <Flex hAlign="center" vAlign="center">
+                  {this.getImage(event.event_name)}
+                  <Text>
+                    {this.getFriendlyString(event.event_name)} at {event.sent_at_second}{constants.TimestampUnit}
+                  </Text>
+              </Flex>
+          </Flex.Item>
         );
         events.push(<br/>);
     });
-
-    if (content.length > 0) {
-        const { id, name, destination } = content[0];
-        return (
-            <Flex column>
-                <Header color="brand">{constants.OrderNumber}{id}</Header>
-                <Text>{constants.OrderName}: {name}</Text>
-                <Text>{constants.Destination}: {destination}</Text>
-                <br/>
-                {events}
-            </Flex>
-        );
-    }
-
-    return (
-        <Text>
-            No history found.
-        </Text>
-    );
-   };
+    return events;
+   }
 
     private getFriendlyString = (event_name: string) => {
         switch(event_name) {
@@ -73,6 +88,8 @@ export class History extends React.Component <
                 return constants.DeliveredHeader;
             case constants.DeliveredEventName:
                 return constants.DeliveredHeader;
+            default:
+                return constants.UnknownEventHeader;
         }
     }
 
