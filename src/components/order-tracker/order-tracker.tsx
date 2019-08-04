@@ -113,18 +113,18 @@ export class OrderTracker extends React.Component<
     ];
     return <Accordion defaultActiveIndex={[0, 1, 2]} panels={panels} />;
   }
-  
+
   private getPanel = (header: string, eventNameContentFilter: string) => {
     return {
       title: this.getTitle(header),
       content: this.getCards(eventNameContentFilter)
     };
   }
-  
+
   private getTitle = (title: string) => {
     return <Header color="brand" as="h3">{title}</Header>;
   }
-  
+
   private getCards = (eventNameContentFilter: string) => {
     return (<Cards content={this.getContent().filter(cardContent => cardContent.event_name === eventNameContentFilter)}/>);
   }

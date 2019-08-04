@@ -18,12 +18,12 @@ export class Clock extends React.Component<
       timeInSeconds: 0
     };
   }
-  
+
   public componentDidMount() {
     this.intervalTimer = setInterval(
       () => {
         const currentTimerVal = this.state.timeInSeconds;
-        this.setState({ timeInSeconds: currentTimerVal+1 })
+        this.setState({ timeInSeconds: currentTimerVal+1 });
       }, 1000
     );
   }
@@ -32,7 +32,7 @@ export class Clock extends React.Component<
     clearInterval(this.intervalTimer);
   }
 
-  public getCurrentTime = () : number => {
+  public getCurrentTime = (): number => {
     return this.state.timeInSeconds;
   }
 
@@ -41,7 +41,7 @@ export class Clock extends React.Component<
       id="header"
       as="h1"
       color="brand"
-      content={constants.ClockHeader + ': ' + this.state.timeInSeconds}
+      content={`${constants.ClockHeader}: ${this.state.timeInSeconds}`}
     />);
   }
 }

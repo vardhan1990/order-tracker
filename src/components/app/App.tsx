@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
-import { OrderTracker } from '../order-tracker/order-tracker'; 
+import { OrderTracker } from '../order-tracker/order-tracker';
 import { Divider, Header, Flex } from '@stardust-ui/react';
-import { AppTitle } from '../constants';
 import { ICardProps } from '../card/card';
 import { emitReadyEventOnSocket } from '../../web-api/api';
+import './App.css';
 import * as constants from '../constants';
 import * as _ from 'lodash';
 
@@ -28,19 +27,19 @@ export class App extends React.Component<
         destination: "initial"
       },
       timeInSeconds: 0
-    }
+    };
   }
 
   public componentDidMount() {
     emitReadyEventOnSocket(
       (newCards: any) => {
-          _.forEach(newCards, newCard => 
+          _.forEach(newCards, newCard =>
             this.setState({
               newCardContent: newCard as ICardProps
             })
-          )
+          );
         },
-      (timer: any) => 
+      (timer: any) =>
         this.setState({
           timeInSeconds: timer as number
         })
@@ -61,7 +60,7 @@ export class App extends React.Component<
             id="header"
             as="h1"
             color="brand"
-            content={constants.ClockHeader + ': ' + this.state.timeInSeconds + constants.TimestampUnit}
+            content={`${constants.ClockHeader  }: ${  this.state.timeInSeconds  }${constants.TimestampUnit}`}
           />
         </Flex>
         <Divider color="brand" size={0}/>

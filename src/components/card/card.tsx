@@ -73,15 +73,15 @@ export class Card extends React.Component<
                 image = OrderTrackerIcon;
                 break;
         }
-        return <Image id="image" src={image} />
+        return <Image id="image" src={image} />;
     }
 
     private getContent = () => {
         return (
             <Flex column gap="gap.small" vAlign="stretch" space="between">
-                <Text truncated content={constants.OrderName + ': ' + this.props.name} />
-                <Text truncated content={constants.Destination + ': ' + this.props.destination} />
-                <Text content={constants.Status + ': ' + this.props.event_name} />
+                <Text truncated content={`${constants.OrderName}: ${this.props.name}`} />
+                <Text truncated content={`${constants.Destination}: ${this.props.destination}`} />
+                <Text content={`${constants.Status}: ${this.props.event_name}`} />
                 <Flex.Item push>
                     <Text timestamp>
                         {constants.UserTimestampHeader} {this.props.sent_at_second} {constants.TimestampUnit}.

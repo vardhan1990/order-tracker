@@ -11,9 +11,9 @@ export class Cards extends React.Component<
   {}
 > {
     public render() {
-        let cards: JSX.Element[] = [];
+        const cards: JSX.Element[] = [];
         const cardsContent = this.props.content;
-        cardsContent.forEach((cardContent) => {
+        cardsContent.forEach(cardContent => {
             cards.push(
                 <Flex.Item hAlign="center" vAlign="center">
                     <Card {...cardContent}/>
