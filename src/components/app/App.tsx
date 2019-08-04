@@ -54,7 +54,7 @@ export class App extends React.Component<
             id="header"
             as="h1"
             color="brand"
-            content={AppTitle}
+            content={constants.AppTitle}
           />
           <Header
             id="header"

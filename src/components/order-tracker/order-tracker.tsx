@@ -72,7 +72,7 @@ export class OrderTracker extends React.Component<
     ];
 
     const onSubmit = (e: any) => {
-      const filterValueEntered = parseInt(new FormData(e.target).get('filter-value') as string);
+      const filterValueEntered = parseInt(new FormData(e.target).get('filter-value') as string, 10);
       if (filterValueEntered && filterValueEntered > 0) {
         this.setState({
           filterDuration: filterValueEntered,
@@ -100,7 +100,8 @@ export class OrderTracker extends React.Component<
   private getContent = () => {
     const { filterDuration } = this.state;
     const currentTime: number = this.props.getCurrentTime();
-    return filterDuration < 0 ? this.fullContent : _.filter(this.fullContent, cardContent => (currentTime - cardContent.sent_at_second) < filterDuration);
+    return filterDuration < 0 ? this.fullContent : _.filter(this.fullContent,
+      cardContent => (currentTime - cardContent.sent_at_second) < filterDuration);
   }
 
   private getPanels = () => {
@@ -126,6 +127,7 @@ export class OrderTracker extends React.Component<
   }
 
   private getCards = (eventNameContentFilter: string) => {
-    return (<Cards content={this.getContent().filter(cardContent => cardContent.event_name === eventNameContentFilter)}/>);
+    return (<Cards content={this.getContent().filter(
+      cardContent => cardContent.event_name === eventNameContentFilter)}/>);
   }
 }
