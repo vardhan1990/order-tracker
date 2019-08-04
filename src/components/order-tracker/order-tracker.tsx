@@ -35,7 +35,7 @@ export class OrderTracker extends React.Component<
     const { newCardContent } = this.props;
 
     if (newCardContent && prevProps.newCardContent !== newCardContent) {
-      this.fullContent = _.remove(this.fullContent, cardContent => cardContent.id === newCardContent.id);
+      _.remove(this.fullContent, cardContent => cardContent.id === newCardContent.id);
       this.fullContent = _.concat(this.fullContent, [newCardContent]);
     }
   }

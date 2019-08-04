@@ -4,11 +4,42 @@ import { OrderTracker } from './components/order-tracker/order-tracker';
 import {Clock} from './components/clock/clock';
 import { Divider, Header, Flex } from '@stardust-ui/react';
 import { AppTitle } from './constants';
+import { ICardProps } from './components/card/card';
+
+interface IAppState {
+  newCardContent: ICardProps;
+}
 
 export class App extends React.Component<
   {},
-  {}
+  IAppState
 > {
+  private interval!: NodeJS.Timeout;
+
+  constructor(state: IAppState) {
+    super(state);
+    this.state = {
+      newCardContent: {
+        id: "initial",
+        name: "initial",
+        event_name: "CREATED",
+        sent_at_second: -1,
+        destination: "initial"
+      }
+    }
+  }
+
+  public componentDidMount() {
+    const content = this.getMockContent();
+    let i=0;
+    this.interval = setInterval(() => {
+      this.setState({ newCardContent: content[i++] as ICardProps });
+      if (i === content.length) {
+        i=0;
+      }
+    }, 5000);
+  }
+
   public render() {
     return (
       <div id="app">
@@ -22,75 +53,47 @@ export class App extends React.Component<
           <Clock />
         </Flex>
         <Divider color="brand" size={0}/>
-        <OrderTracker getCurrentTime={() => 200} />
+        <OrderTracker getCurrentTime={() => 200} newCardContent={this.state.newCardContent} />
       </div>
     );
   }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+  
+  private getMockContent = () => {
+    return [
+      {
+        id: "TEST",
+        name: "Cheese Pizza",
+        event_name: "CREATED",
+        sent_at_second: 1,
+        destination: "1041 S Fairfax Ave, LA, CA 90019"
+      },
+      {
+        id: "TEST",
+        name: "Cheese Pizza",
+        event_name: "COOKED",
+        sent_at_second: 1,
+        destination: "1041 S Fairfax Ave, LA, CA 90019"
+      },
+      {
+        id: "TEST",
+        name: "Cheese Pizza",
+        event_name: "DRIVER_RECEIVED",
+        sent_at_second: 1,
+        destination: "1041 S Fairfax Ave, LA, CA 90019"
+      },
+      {
+        id: "TEST",
+        name: "Cheese Pizza",
+        event_name: "DELIVERED",
+        sent_at_second: 1,
+        destination: "1041 S Fairfax Ave, LA, CA 90019"
+      }
+    ];
+  }
 }
-
-// const generateContent = () => {
-//   const content = getMockContent();
-// };
-
-// const getMockContent = () => {
-//   return [
-//     {
-//       id: "TEST",
-//       name: "Cheese Pizza",
-//       event_name: "CREATED",
-//       sent_at_second: 201,
-//       destination: "1041 S Fairfax Ave, LA, CA 90019"
-//     }, 
-//     {
-//       id: "123SAD3XS19",
-//       name: "Cheese Pizza",
-//       event_name: "CREATED",
-//       sent_at_second: 123,
-//       destination: "1041 S Fairfax Ave, LA, CA 90019"
-//     }, 
-//     {
-//       id: "123SAD3XS195",
-//       name: "Cheese Pizza",
-//       event_name: "DELIVERED",
-//       sent_at_second: 123,
-//       destination: "1041 S Fairfax Ave, LA, CA 90019"
-//     }, 
-//     {
-//       id: "123SAD3XS19",
-//       name: "Cheese Pizza",
-//       event_name: "CREATED",
-//       sent_at_second: 123,
-//       destination: "1041 S Fairfax Ave, LA, CA 90019"
-//     }, 
-//     {
-//       id: "123SAD3XS193",
-//       name: "Cheese Pizza",
-//       event_name: "COOKED",
-//       sent_at_second: 123,
-//       destination: "1041 S Fairfax Ave, LA, CA 90019"
-//     },
-//     {
-//       id: "123SAD3XS19",
-//       name: "Cheese Pizza",
-//       event_name: "DRIVER_RECEIVED",
-//       sent_at_second: 123,
-//       destination: "1041 S Fairfax Ave, LA, CA 90019"
-//     },
-//     {
-//       id: "123SAD3XS191",
-//       name: "Cheese Pizza",
-//       event_name: "COOKED",
-//       sent_at_second: 123,
-//       destination: "1041 S Fairfax Ave, LA, CA 90019"
-//     },
-//     {
-//       id: "123SAD3XS192",
-//       name: "Cheese Pizza",
-//       event_name: "CANCELLED",
-//       sent_at_second: 123,
-//       destination: "1041 S Fairfax Ave, LA, CA 90019"
-//     }
-//   ];
-// }
 
 export default App;
