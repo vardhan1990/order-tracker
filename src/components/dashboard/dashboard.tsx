@@ -6,25 +6,25 @@ import * as _ from 'lodash';
 import React from 'react';
 import { Accordion, Button, Flex, Header, Input, Text } from '@stardust-ui/react';
 
-export interface IOrderTrackerProps {
+export interface IDashboardProps {
   getCurrentTime: () => number;
   newUpdate?: ICardProps;
 }
-export interface IOrderTrackerState {
+export interface IDashboardState {
   filterDurationInput: string;
   filterDuration: number;
   filterMessage: string;
   viewHistoryId: string;
 }
 
-export class OrderTracker extends React.Component<
-  IOrderTrackerProps,
-  IOrderTrackerState
+export class Dashboard extends React.Component<
+  IDashboardProps,
+  IDashboardState
 > {
   private latestStateOfAllOrdersUnfiltered: ICardProps[];
   private allUpdatesOfAllOrdersUnfiltered: ICardProps[];
 
-  constructor(props: IOrderTrackerProps, state: IOrderTrackerState) {
+  constructor(props: IDashboardProps, state: IDashboardState) {
     super(props, state);
     this.latestStateOfAllOrdersUnfiltered = [];
     this.allUpdatesOfAllOrdersUnfiltered = [];
@@ -36,7 +36,7 @@ export class OrderTracker extends React.Component<
     };
   }
 
-  public componentDidUpdate(prevProps: IOrderTrackerProps, prevState: IOrderTrackerState) {
+  public componentDidUpdate(prevProps: IDashboardProps, prevState: IDashboardState) {
     const { newUpdate: newCardContent } = this.props;
 
     if (newCardContent && prevProps.newUpdate !== newCardContent) {

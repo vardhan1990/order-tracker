@@ -1,7 +1,7 @@
 import { ICardProps } from '../card/card';
 import * as constants from '../constants';
 import * as _ from 'lodash';
-import { OrderTracker } from '../order-tracker/order-tracker';
+import { Dashboard } from '../dashboard/dashboard';
 import React from 'react';
 import { Divider, Header, Flex } from '@stardust-ui/react';
 import { emitReadyEventOnSocket } from '../../web-api/api';
@@ -65,7 +65,7 @@ export class App extends React.Component<
           />
         </Flex>
         <Divider color="brand" size={0}/>
-        <OrderTracker getCurrentTime={() => this.state.timeInSeconds} newUpdate={this.state.newUpdate} />
+        <Dashboard getCurrentTime={() => this.state.timeInSeconds} newUpdate={this.state.newUpdate} />
       </div>
     );
   }
