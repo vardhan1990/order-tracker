@@ -49,11 +49,11 @@ export class Dashboard extends React.Component<
   public render() {
     return (
       <Flex column>
-        <Flex>
-          <Flex.Item size="size.half">
+        <Flex space="evenly">
+          <Flex.Item>
               {this.getFilters()}
           </Flex.Item>
-          <Flex.Item size="size.half">
+          <Flex.Item>
             {this.getViewHistorySection()}
           </Flex.Item>
         </Flex>
@@ -65,9 +65,9 @@ export class Dashboard extends React.Component<
   private getViewHistorySection = () => {
     return (
       <Flex column hAlign="center" vAlign="center" gap="gap.small">
-        <Header as="h3" color="brand">{constants.ViewOrderHistory}</Header>
-        <Header as="h4">{constants.ViewOrderHistoryDescription}</Header>
-        <Header as="span">{constants.ViewOrderHistoryPrompt}</Header>
+        <Header as="h3" color="brand">{constants.HistorySectionHeader}</Header>
+        <Header as="h4">{constants.HistoryDescription}</Header>
+        <Header as="span">{constants.HistoryPrompt}</Header>
         <Flex>
           <Input id="view-history-id" type="string" value={this.state.viewHistoryId} onChange={e => {
               this.setState({
@@ -85,9 +85,9 @@ export class Dashboard extends React.Component<
   private getFilters = () => {
     return (
       <Flex column hAlign="center" vAlign="center" gap="gap.small">
-        <Header as="h3" color="brand">{constants.FiltersHeader}</Header>
-        <Header as="h4">{constants.FiltersHeaderDescription}</Header>
-        <Header as="span">{constants.FiltersHeaderPrompt}</Header>
+        <Header as="h3" color="brand">{constants.FiltersSectionHeader}</Header>
+        <Header as="h4">{constants.FiltersSectionDescription}</Header>
+        <Header as="span">{constants.FiltersPrompt}</Header>
         <Flex>
           <Input id="filter-value" type="number" value={this.state.filterDurationInput} onChange={e => {
                 const inputValue = (e.target as any).value as string;
@@ -126,19 +126,20 @@ export class Dashboard extends React.Component<
 
   private getPanels = () => {
     const panels = [
-      this.getPanel(constants.CreatedHeader, constants.CreatedEventName),
-      this.getPanel(constants.CookedHeader, constants.CookedEventName),
-      this.getPanel(constants.DriverReceivedHeader, constants.DriverReceivedEventName),
-      this.getPanel(constants.CancelledHeader, constants.CancelledEventName),
-      this.getPanel(constants.DeliveredHeader, constants.DeliveredEventName)
+      this.getPanel(constants.CreatedEventName),
+      this.getPanel(constants.CookedEventName),
+      this.getPanel(constants.DriverReceivedEventName),
+      this.getPanel(constants.CancelledEventName),
+      this.getPanel(constants.DeliveredEventName)
     ];
     return <Accordion defaultActiveIndex={[0, 1, 2]} panels={panels} />;
   }
 
-  private getPanel = (header: string, eventNameContentFilter: string) => {
+  private getPanel = (eventName: string) => {
+    const header = constants.getFriendlyString(eventName);
     return {
       title: this.getTitle(header),
-      content: this.getCards(eventNameContentFilter)
+      content: this.getCards(eventName)
     };
   }
 

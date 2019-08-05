@@ -22,7 +22,7 @@ export class History extends React.Component <
 > {
 
    public render() {
-       return <Dialog content={this.getDialog()} trigger={<Button content={constants.ViewOrderHistory} />} />;
+       return <Dialog content={this.getDialog()} trigger={<Button content={constants.HistoryButton} />} />;
    }
 
     private getDialog = () => {
@@ -67,7 +67,7 @@ export class History extends React.Component <
               <Flex hAlign="center" vAlign="center">
                   {this.getImage(event.event_name)}
                   <Text>
-                    {this.getFriendlyString(event.event_name)} at {event.sent_at_second}{constants.TimestampUnit}
+                    {constants.getFriendlyString(event.event_name)} at {event.sent_at_second}{constants.TimestampUnit}
                   </Text>
               </Flex>
           </Flex.Item>
@@ -76,23 +76,6 @@ export class History extends React.Component <
     });
     return events;
    }
-
-    private getFriendlyString = (event_name: string) => {
-        switch(event_name) {
-            case constants.CreatedEventName:
-                return constants.CreatedHeader;
-            case constants.CookedEventName:
-                return constants.CookedHeader;
-            case constants.CancelledEventName:
-                return constants.CancelledHeader;
-            case constants.DriverReceivedEventName:
-                return constants.DeliveredHeader;
-            case constants.DeliveredEventName:
-                return constants.DeliveredHeader;
-            default:
-                return constants.UnknownEventHeader;
-        }
-    }
 
     private getImage = (event_name: string) => {
         let image;
