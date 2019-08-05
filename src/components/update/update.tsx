@@ -73,33 +73,45 @@ export class Update extends React.Component <
    private getInputs = () => {
        return (
            <Flex column>
-                <Grid columns={2}>
-                        <Header as="span">{constants.UpdateOrderNamePrompt}</Header>
-                        <Flex.Item grow>
-                            <Input fluid id="order-name-input" type="string" value={this.state.name} onChange={(e: any) => {
-                                const inputValue = (e.target as any).value as string;
-                                this.setState({
-                                    name: inputValue
-                                });
-                            }}/>
-                        </Flex.Item>
-                </Grid>
+                {this.getNameInput()}
                 <br />
-                <Grid columns={2}>
-                        <Header as="span">{constants.UpdateOrderDestinationPrompt}</Header>
-                        <Flex.Item grow>
-                            <Input fluid id="order-destination-input" type="string" value={this.state.destination} onChange={(e: any) => {
-                                const inputValue = (e.target as any).value as string;
-                                this.setState({
-                                    destination: inputValue
-                                });
-                            }}/>
-                        </Flex.Item>
-                </Grid>
+                {this.getDestinationInput()}
                 <br />
                 {this.getStateInput()}
                 <br />
            </Flex>
+       );
+   }
+   
+   private getNameInput = () => {
+       return (
+        <Grid columns={2}>
+            <Header as="span">{constants.UpdateOrderNamePrompt}</Header>
+            <Flex.Item grow>
+                <Input fluid id="order-name-input" type="string" value={this.state.name} onChange={(e: any) => {
+                    const inputValue = (e.target as any).value as string;
+                    this.setState({
+                        name: inputValue
+                    });
+                }}/>
+            </Flex.Item>
+        </Grid>
+       );
+   }
+
+   private getDestinationInput = () => {
+       return (
+        <Grid columns={2}>
+            <Header as="span">{constants.UpdateOrderDestinationPrompt}</Header>
+            <Flex.Item grow>
+                <Input fluid id="order-destination-input" type="string" value={this.state.destination} onChange={(e: any) => {
+                    const inputValue = (e.target as any).value as string;
+                    this.setState({
+                        destination: inputValue
+                    });
+                }}/>
+            </Flex.Item>
+        </Grid>
        );
    }
 
