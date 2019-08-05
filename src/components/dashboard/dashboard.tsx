@@ -47,6 +47,7 @@ export class Dashboard extends React.Component<
       _.remove(this.latestStateOfAllOrdersUnfiltered, update => update.id === newUpdate.id);
       this.latestStateOfAllOrdersUnfiltered = _.concat(this.latestStateOfAllOrdersUnfiltered, [newUpdate]);
       this.allUpdatesOfAllOrdersUnfiltered = _.concat(this.allUpdatesOfAllOrdersUnfiltered, [newUpdate]);
+      this.forceUpdate();
     }
   }
 
