@@ -10,10 +10,8 @@ import * as constants from '../constants';
 import { Button, Flex, Header, Image, Text } from '@stardust-ui/react';
 import { IUpdate } from '../../update.interface';
 
-export interface ICardProps extends IUpdate {}
-
 export class Card extends React.Component<
-  ICardProps,
+  IUpdate,
   {}
 > {
     public render() {
