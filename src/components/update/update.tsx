@@ -97,30 +97,36 @@ export class Update extends React.Component <
                         </Flex.Item>
                 </Grid>
                 <br />
-                <Grid columns={2}>
-                        <Header as="span">{constants.UpdateOrderStatePrompt}</Header>
-                        <Flex.Item grow>
-                        <Dropdown
-                            fluid
-                            items={[
-                                constants.CreatedEventName,
-                                constants.CookedEventName,
-                                constants.DriverReceivedEventName,
-                                constants.CancelledEventName,
-                                constants.DeliveredEventName
-                            ]}
-                            onSelectedChange={
-                                (e, input) => {
-                                    this.setState({
-                                        event_name: (input as any).value as string
-                                    });
-                                }
-                            }
-                        />
-                        </Flex.Item>
-                </Grid>
+                {this.getStateInput()}
                 <br />
            </Flex>
+       );
+   }
+
+   private getStateInput = () => {
+       return (
+        <Grid columns={2}>
+            <Header as="span">{constants.UpdateOrderStatePrompt}</Header>
+            <Flex.Item grow>
+            <Dropdown
+                fluid
+                items={[
+                    constants.CreatedEventName,
+                    constants.CookedEventName,
+                    constants.DriverReceivedEventName,
+                    constants.CancelledEventName,
+                    constants.DeliveredEventName
+                ]}
+                onSelectedChange={
+                    (e, input) => {
+                        this.setState({
+                            event_name: (input as any).value as string
+                        });
+                    }
+                }
+            />
+            </Flex.Item>
+        </Grid>
        );
    }
 
@@ -133,7 +139,8 @@ export class Update extends React.Component <
             return;
         }
 
-        this.props.sendUpdateFn(this.props.id, this.state.name, this.state.destination, this.state.event_name as constants.EventNameType);
+        this.props.sendUpdateFn(this.props.id, this.state.name,
+            this.state.destination, this.state.event_name as constants.EventNameType);
         this.setState({
             name: "",
             destination: "",
