@@ -31,7 +31,7 @@ export class Dashboard extends React.Component<
     this.state = {
       filterDurationInput: "",
       filterDuration: -1,
-      filterMessage: constants.NoFilterApplied,
+      filterMessage: constants.NoFilterAppliedMessage,
       viewHistoryId: ""
     };
   }
@@ -101,12 +101,12 @@ export class Dashboard extends React.Component<
               if (filterDurationInputNum && filterDurationInputNum > 0) {
                 this.setState({
                   filterDuration: filterDurationInputNum,
-                  filterMessage: constants.FilterCurrentlyApplied
+                  filterMessage: constants.FilterCurrentlyAppliedMessage
                 });
               } else {
                 this.setState({
                   filterDuration: -1,
-                  filterMessage: constants.NoFilterApplied
+                  filterMessage: constants.NoFilterAppliedMessage
                 });
               }
             }

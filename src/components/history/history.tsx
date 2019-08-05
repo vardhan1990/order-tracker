@@ -33,7 +33,7 @@ export class History extends React.Component <
         if (historyOrdered.length < 1) {
             return (
                 <Text>
-                    {constants.NoHistoryFound}
+                    {constants.NoHistoryFoundMessage}
                 </Text>
             );
         }
