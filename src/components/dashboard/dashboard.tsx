@@ -138,7 +138,7 @@ export class Dashboard extends React.Component<
               }
             }/>
         </Flex>
-        {<Update 
+        {<Update
               latestUpdate={_.filter(this.latestStateOfAllOrdersUnfiltered,
                   update => update.id === this.state.updateOrderId)}
               id={this.state.updateOrderId}

@@ -113,7 +113,7 @@ export class Update extends React.Component <
                                 (e, input) => {
                                     this.setState({
                                         event_name: (input as any).value as string
-                                    })
+                                    });
                                 }
                             }
                         />
