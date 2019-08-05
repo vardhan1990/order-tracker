@@ -41,12 +41,12 @@ export class Dashboard extends React.Component<
   }
 
   public componentDidUpdate(prevProps: IDashboardProps, prevState: IDashboardState) {
-    const { newUpdate: newCardContent } = this.props;
+    const { newUpdate } = this.props;
 
-    if (newCardContent && prevProps.newUpdate !== newCardContent) {
-      _.remove(this.latestStateOfAllOrdersUnfiltered, cardContent => cardContent.id === newCardContent.id);
-      this.latestStateOfAllOrdersUnfiltered = _.concat(this.latestStateOfAllOrdersUnfiltered, [newCardContent]);
-      this.allUpdatesOfAllOrdersUnfiltered = _.concat(this.allUpdatesOfAllOrdersUnfiltered, [newCardContent]);
+    if (newUpdate && prevProps.newUpdate !== newUpdate) {
+      _.remove(this.latestStateOfAllOrdersUnfiltered, cardContent => cardContent.id === newUpdate.id);
+      this.latestStateOfAllOrdersUnfiltered = _.concat(this.latestStateOfAllOrdersUnfiltered, [newUpdate]);
+      this.allUpdatesOfAllOrdersUnfiltered = _.concat(this.allUpdatesOfAllOrdersUnfiltered, [newUpdate]);
     }
   }
 
@@ -140,7 +140,7 @@ export class Dashboard extends React.Component<
         </Flex>
         {<Update 
               latestUpdate={_.filter(this.latestStateOfAllOrdersUnfiltered,
-                  cardContent => cardContent.id === this.state.updateOrderId)}
+                  update => update.id === this.state.updateOrderId)}
               id={this.state.updateOrderId}
               sendUpdateFn={this.props.sendUpdateFn}
           />}
@@ -152,7 +152,7 @@ export class Dashboard extends React.Component<
     const { filterDuration } = this.state;
     const currentTime: number = this.props.getCurrentTime();
     return filterDuration < 0 ? this.latestStateOfAllOrdersUnfiltered : _.filter(this.latestStateOfAllOrdersUnfiltered,
-      cardContent => (currentTime - cardContent.sent_at_second) < filterDuration);
+      update => (currentTime - update.sent_at_second) < filterDuration);
   }
 
   private getCardsSection = () => {
@@ -181,7 +181,7 @@ export class Dashboard extends React.Component<
   private getCards = (eventNameContentFilter: string) => {
     return (
       <Cards content={this.getLatestStateOfOrdersFiltered().filter(
-        cardContent => cardContent.event_name === eventNameContentFilter)} />
+        update => update.event_name === eventNameContentFilter)} />
     );
   }
 }
