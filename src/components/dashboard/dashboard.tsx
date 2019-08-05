@@ -51,13 +51,13 @@ export class Dashboard extends React.Component<
       <Flex column>
         <Flex space="evenly">
           <Flex.Item>
-              {this.getFilters()}
+              {this.getFiltersSection()}
           </Flex.Item>
           <Flex.Item>
             {this.getViewHistorySection()}
           </Flex.Item>
         </Flex>
-        {this.getPanels()}
+        {this.getCardsSection()}
       </Flex>
     );
   }
@@ -82,7 +82,7 @@ export class Dashboard extends React.Component<
     );
   }
 
-  private getFilters = () => {
+  private getFiltersSection = () => {
     return (
       <Flex column hAlign="center" vAlign="center" gap="gap.small">
         <Header as="h3" color="brand">{constants.FiltersSectionHeader}</Header>
@@ -124,7 +124,7 @@ export class Dashboard extends React.Component<
       cardContent => (currentTime - cardContent.sent_at_second) < filterDuration);
   }
 
-  private getPanels = () => {
+  private getCardsSection = () => {
     const panels = [
       this.getPanel(constants.CreatedEventName),
       this.getPanel(constants.CookedEventName),
