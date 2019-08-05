@@ -44,7 +44,7 @@ export class Dashboard extends React.Component<
     const { newUpdate } = this.props;
 
     if (newUpdate && prevProps.newUpdate !== newUpdate) {
-      _.remove(this.latestStateOfAllOrdersUnfiltered, cardContent => cardContent.id === newUpdate.id);
+      _.remove(this.latestStateOfAllOrdersUnfiltered, update => update.id === newUpdate.id);
       this.latestStateOfAllOrdersUnfiltered = _.concat(this.latestStateOfAllOrdersUnfiltered, [newUpdate]);
       this.allUpdatesOfAllOrdersUnfiltered = _.concat(this.allUpdatesOfAllOrdersUnfiltered, [newUpdate]);
     }
