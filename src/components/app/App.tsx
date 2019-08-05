@@ -40,9 +40,9 @@ export class App extends React.Component<
             })
           );
         },
-      (timer: any) =>
+      (clockTick: any) =>
         this.setState({
-          timeInSeconds: timer as number
+          timeInSeconds: clockTick as number
         })
     );
   }
