@@ -65,9 +65,22 @@ export class App extends React.Component<
           />
         </Flex>
         <Divider color="brand" size={0}/>
-        <Dashboard getCurrentTime={() => this.state.timeInSeconds} newUpdate={this.state.newUpdate} />
+        <Dashboard getCurrentTime={() => this.state.timeInSeconds} newUpdate={this.state.newUpdate}
+                sendUpdateFn={this.sendUpdateFn.bind(this)} />
       </div>
     );
+  }
+
+  private sendUpdateFn = (id: string, name: string, destination: string, event_name: constants.EventNameType) => {
+    this.setState({
+      newUpdate: {
+        id,
+        name,
+        destination,
+        event_name,
+        sent_at_second: this.state.timeInSeconds
+      }
+    });
   }
 }
 

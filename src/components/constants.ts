@@ -9,14 +9,26 @@ export const FiltersSectionDescription = "Filter to updates within a duration";
 export const FiltersPrompt = "Enter duration (in seconds)";
 export const FilterButton = "Filter";
 export const NoFilterAppliedMessage = "";
-export const FilterCurrentlyAppliedMessage = "Filter currently applied. Filter with empty input to clear.";
+export const FilterCurrentlyAppliedMessage = "Filter currently applied. Please filter with empty input to clear.";
 
 // Order History
 export const HistorySectionHeader = "Order History";
 export const HistoryDescription = "View all updates for a specific order";
 export const HistoryPrompt = "Enter Order ID";
 export const HistoryButton = "Order History";
-export const NoHistoryFoundMessage = "No history found.";
+export const NoHistoryFoundMessage = "No history corresponding to this order ID.";
+
+// Order Updates
+export const UpdateSectionHeader = "Order Create/Update";
+export const UpdateDescription = "Update the information of a specific order";
+export const UpdateOrderIDPrompt = "Enter Order ID";
+export const UpdateOrCreateButton = "Update or Create";
+export const UpdateOrderNamePrompt = "Enter new name";
+export const UpdateOrderDestinationPrompt = "Enter new destination";
+export const UpdateOrderStatePrompt = "Select new state";
+export const UpdateButton = "Done";
+export const UpdateSentConfirmation = "Update sent.";
+export const UpdateFormIncomplete = "Please provide valid inputs for the ID and all fields in the form before clicking the button.";
 
 // Card property names
 export const Status = "Current Status";

@@ -5,16 +5,19 @@ import * as _ from 'lodash';
 import React from 'react';
 import { Accordion, Button, Flex, Header, Input, Text } from '@stardust-ui/react';
 import { IUpdate } from '../../update.interface';
+import { Update, sendUpdateFn } from '../update/update';
 
 export interface IDashboardProps {
   getCurrentTime: () => number;
   newUpdate?: IUpdate;
+  sendUpdateFn: sendUpdateFn
 }
 export interface IDashboardState {
   filterDurationInput: string;
   filterDuration: number;
   filterMessage: string;
   viewHistoryId: string;
+  updateOrderId: string;
 }
 
 export class Dashboard extends React.Component<
@@ -32,7 +35,8 @@ export class Dashboard extends React.Component<
       filterDurationInput: "",
       filterDuration: -1,
       filterMessage: constants.NoFilterAppliedMessage,
-      viewHistoryId: ""
+      viewHistoryId: "",
+      updateOrderId: ""
     };
   }
 
@@ -56,28 +60,11 @@ export class Dashboard extends React.Component<
           <Flex.Item>
             {this.getViewHistorySection()}
           </Flex.Item>
+          <Flex.Item>
+            {this.getUpdateOrderSection()}
+          </Flex.Item>
         </Flex>
         {this.getCardsSection()}
-      </Flex>
-    );
-  }
-
-  private getViewHistorySection = () => {
-    return (
-      <Flex column hAlign="center" vAlign="center" gap="gap.small">
-        <Header as="h3" color="brand">{constants.HistorySectionHeader}</Header>
-        <Header as="h4">{constants.HistoryDescription}</Header>
-        <Header as="span">{constants.HistoryPrompt}</Header>
-        <Flex>
-          <Input id="view-history-id" type="string" value={this.state.viewHistoryId} onChange={e => {
-              this.setState({
-                viewHistoryId: (e.target as any).value as string
-              });
-              }
-            }/>
-          <History allUpdatesOfAllOrdersUnfiltered={this.allUpdatesOfAllOrdersUnfiltered}
-              id={this.state.viewHistoryId} />
-        </Flex>
       </Flex>
     );
   }
@@ -87,8 +74,8 @@ export class Dashboard extends React.Component<
       <Flex column hAlign="center" vAlign="center" gap="gap.small">
         <Header as="h3" color="brand">{constants.FiltersSectionHeader}</Header>
         <Header as="h4">{constants.FiltersSectionDescription}</Header>
-        <Header as="span">{constants.FiltersPrompt}</Header>
-        <Flex>
+        <Flex hAlign="center" vAlign="center" gap="gap.small">
+          <Header as="span">{constants.FiltersPrompt}</Header>
           <Input id="filter-value" type="number" value={this.state.filterDurationInput} onChange={e => {
                 const inputValue = (e.target as any).value as string;
                 this.setState({
@@ -96,7 +83,8 @@ export class Dashboard extends React.Component<
                 });
               }
             }/>
-          <Button content={constants.FilterButton} onClick={() => {
+        </Flex>
+        <Button content={constants.FilterButton} onClick={() => {
               const filterDurationInputNum = parseInt(this.state.filterDurationInput, 10);
               if (filterDurationInputNum && filterDurationInputNum > 0) {
                 this.setState({
@@ -111,8 +99,51 @@ export class Dashboard extends React.Component<
               }
             }
           }/>
+          <Text>{this.state.filterMessage}</Text>
+      </Flex>
+    );
+  }
+
+  private getViewHistorySection = () => {
+    return (
+      <Flex column hAlign="center" vAlign="center" gap="gap.small">
+        <Header as="h3" color="brand">{constants.HistorySectionHeader}</Header>
+        <Header as="h4">{constants.HistoryDescription}</Header>
+        <Flex hAlign="center" vAlign="center" gap="gap.small">
+          <Header as="span">{constants.HistoryPrompt}</Header>
+          <Input id="view-history-id" type="string" value={this.state.viewHistoryId} onChange={e => {
+              this.setState({
+                viewHistoryId: (e.target as any).value as string
+              });
+              }
+            }/>
         </Flex>
-        <Text>{this.state.filterMessage}</Text>
+        <History allUpdatesOfAllOrdersUnfiltered={this.allUpdatesOfAllOrdersUnfiltered}
+              id={this.state.viewHistoryId} />
+      </Flex>
+    );
+  }
+
+  private getUpdateOrderSection = () => {
+    return (
+      <Flex column hAlign="center" vAlign="center" gap="gap.small">
+        <Header as="h3" color="brand">{constants.UpdateSectionHeader}</Header>
+        <Header as="h4">{constants.UpdateDescription}</Header>
+        <Flex hAlign="center" vAlign="center" gap="gap.small">
+          <Header as="span">{constants.UpdateOrderIDPrompt}</Header>
+          <Input id="update-order-id" type="string" value={this.state.updateOrderId} onChange={e => {
+              this.setState({
+                updateOrderId: (e.target as any).value as string
+              });
+              }
+            }/>
+        </Flex>
+        {<Update 
+              latestUpdate={_.filter(this.latestStateOfAllOrdersUnfiltered,
+                  cardContent => cardContent.id === this.state.updateOrderId)}
+              id={this.state.updateOrderId}
+              sendUpdateFn={this.props.sendUpdateFn}
+          />}
       </Flex>
     );
   }
