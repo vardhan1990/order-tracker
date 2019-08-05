@@ -82,7 +82,7 @@ export class Update extends React.Component <
            </Flex>
        );
    }
-   
+
    private getNameInput = () => {
        return (
         <Grid columns={2}>
