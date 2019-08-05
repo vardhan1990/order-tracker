@@ -38,7 +38,8 @@ export class History extends React.Component <
             );
         }
 
-        const { id, name, destination } = historyOrdered[0];
+        const lastUpdateForOrder = historyOrdered[historyOrdered.length-1];
+        const { id, name, destination } = lastUpdateForOrder;
         return (
             <Flex column>
                 {this.getHeaderAndMetadata(id, name, destination)}

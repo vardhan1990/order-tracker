@@ -14,15 +14,15 @@ export const FilterCurrentlyAppliedMessage = "Filter currently applied. Please f
 // Order History
 export const HistorySectionHeader = "Order History";
 export const HistoryDescription = "View all updates for a specific order";
-export const HistoryPrompt = "Enter Order ID";
+export const HistoryPrompt = "Enter order ID";
 export const HistoryButton = "Order History";
 export const NoHistoryFoundMessage = "No history corresponding to this order ID.";
 
 // Order Updates
-export const UpdateSectionHeader = "Order Create/Update";
-export const UpdateDescription = "Update the information of a specific order";
-export const UpdateOrderIDPrompt = "Enter Order ID";
-export const UpdateOrCreateButton = "Update or Create";
+export const UpdateSectionHeader = "Order Update / Create";
+export const UpdateDescription = "Update the information of a specific order or create a new one";
+export const UpdateOrderIDPrompt = "Enter new or existing order ID";
+export const UpdateOrCreateButton = "Update / Create";
 export const UpdateOrderNamePrompt = "Enter new name";
 export const UpdateOrderDestinationPrompt = "Enter new destination";
 export const UpdateOrderStatePrompt = "Select new state";

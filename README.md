@@ -1,51 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Usage
 
-## Available Scripts
+### Setup
 
-In the project directory, you can run:
+Install yarn 1.5.1.
 
-### `npm start`
+Run `yarn install`.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Start app
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Run `yarn start`.
 
-### `npm test`
+Navigate to `localhost:3000` to interact with the app.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Quality
 
-### `npm run build`
+Run `yarn run eslint **/**.tsx` to ensure all files meet ilnting requirements.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run `yarn run test` to run tests.
 
 ## Technologies used
-Typescript
-React
-npm and yarn
-Jest
-Stardust UI
+
+### Typescript
+
+To develop a web app, Typescript provides the benefits of object oriented programming while being able to leverage the full power of Javascript as a web programming language. For that reason, Typescript was the language of choice.
+
+### React 
+
+For a web app that needs many real-time updates, React is a great technology choice since it is optimized for faster and efficient rendering with the help of the internal ReactDOM. For that reason, this project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
+
+### Stardust UI
+
+Explored several libraries that provide UI plug-and-play React components to simplify development. For the components I needed, [Semantic UI React](https://react.semantic-ui.com/introduction) seemed to have a lot of good support as well as recommendation from the community. However, it seemed like it did not have too many recent updates. I learnt that developers of Semantic UI React had forked and developed [Stardust UI React](https://stardust-ui.github.io/react/) more recently. Having found the same value plus the recency in updates, this became a good choice.
