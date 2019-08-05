@@ -61,7 +61,7 @@ export const getFriendlyString = (event_name: string) => {
         case CancelledEventName:
             return CancelledFriendlyString;
         case DriverReceivedEventName:
-            return DeliveredFriendlyString;
+            return DriverReceivedFriendlyString;
         case DeliveredEventName:
             return DeliveredFriendlyString;
         default:
