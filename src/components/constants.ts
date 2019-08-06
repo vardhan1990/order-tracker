@@ -29,6 +29,7 @@ export const UpdateOrderStatePrompt = "Select new state";
 export const UpdateButton = "Done";
 export const UpdateSentConfirmation = "Update sent.";
 export const UpdateFormIncomplete = "Please provide valid inputs for the ID and all fields in the form before clicking the button.";
+export const UpdateHistory = "Update History";
 
 // Card property names
 export const Status = "Current Status";

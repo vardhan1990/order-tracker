@@ -43,7 +43,7 @@ export class History extends React.Component <
         return (
             <Flex column>
                 {this.getHeaderAndMetadata(id, name, destination)}
-                <br/>
+                <Header styles={{"margin": "1.5rem 0 0.5rem 0 "}} as="h3" color="brand">{constants.UpdateHistory}</Header>
                 {this.getUpdatesTimeline(historyOrdered)}
             </Flex>
         );
@@ -52,10 +52,13 @@ export class History extends React.Component <
    private getHeaderAndMetadata = (id: string, name: string, destination: string) => {
        return (
         <div>
-            <Header color="brand">{constants.OrderNumber}{id}</Header>
-            <Text>{constants.OrderName}: {name}</Text>
+            <Header styles={{"margin": "0 0 0 0 "}} align="center" color="brand">{constants.OrderNumber}{id}</Header>
             <br />
-            <Text>{constants.Destination}: {destination}</Text>
+            <Header styles={{"margin": "1.5rem 0 0.5rem 0 "}} as="h3" color="brand">{constants.OrderName}</Header>
+            <Text>{name}</Text>
+            <br />
+            <Header styles={{"margin": "1.5rem 0 0.5rem 0 "}} as="h3" color="brand">{constants.Destination}</Header>
+            <Text>{destination}</Text>
         </div>
        );
    }
@@ -66,7 +69,7 @@ export class History extends React.Component <
         events.push(
           <Flex.Item>
               <Flex vAlign="end">
-                  <Text>event.sent_at_second}{constants.TimestampUnit}</Text>
+                  <Text timestamp>{event.sent_at_second}{constants.TimestampUnit}</Text>
                   {this.getImage(event.event_name)}
                   <Text>{constants.getFriendlyString(event.event_name)}</Text>
               </Flex>
