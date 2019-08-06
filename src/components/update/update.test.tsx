@@ -18,7 +18,7 @@ describe("Update", () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    
+
     mount(
         <Provider theme={themes.teams}>
             <Update latestUpdate={latestUpdate} id={"id"} sendUpdateFn={sendUpdateFn} />

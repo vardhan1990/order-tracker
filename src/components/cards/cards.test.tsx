@@ -15,7 +15,7 @@ describe("Cards", () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    
+
     mount(
         <Provider theme={themes.teams}>
             <Cards content={updates} />
