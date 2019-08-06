@@ -15,7 +15,7 @@ export class History extends React.Component <
 > {
 
    public render() {
-       return <Dialog content={this.getDialog()} trigger={<Button content={constants.HistoryButton} />} />;
+       return <Dialog key="history-dialog" content={this.getDialog()} trigger={<Button content={constants.HistoryButton} />} />;
    }
 
     private getDialog = () => {
@@ -25,7 +25,7 @@ export class History extends React.Component <
 
         if (historyOrdered.length < 1) {
             return (
-                <Text>
+                <Text key="no-history">
                     {constants.NoHistoryFoundMessage}
                 </Text>
             );
@@ -36,7 +36,7 @@ export class History extends React.Component <
         return (
             <Flex column>
                 {this.getHeaderAndMetadata(id, name, destination)}
-                <Header styles={{"margin": "1.5rem 0 0.5rem 0 "}} as="h3" color="brand">{constants.UpdateHistory}</Header>
+                <Header key="update-history-title" styles={{"margin": "1.5rem 0 0.5rem 0 "}} as="h3" color="brand">{constants.UpdateHistory}</Header>
                 {this.getUpdatesTimeline(historyOrdered)}
             </Flex>
         );
@@ -45,35 +45,37 @@ export class History extends React.Component <
    private getHeaderAndMetadata = (id: string, name: string, destination: string) => {
        return (
         <div>
-            <Header styles={{"margin": "0 0 0 0 "}} align="center" color="brand">{constants.OrderNumber}{id}</Header>
-            <br />
-            <Header styles={{"margin": "1.5rem 0 0.5rem 0 "}} as="h3" color="brand">{constants.OrderName}</Header>
-            <Text>{name}</Text>
-            <br />
-            <Header styles={{"margin": "1.5rem 0 0.5rem 0 "}} as="h3" color="brand">{constants.Destination}</Header>
-            <Text>{destination}</Text>
+            <Header key="update-dialog-title" styles={{"margin": "0 0 0 0 "}} align="center" color="brand">{constants.OrderNumber}{id}</Header>
+            <br key="update-dialog-br"/>
+            <Header key="order-name-title" styles={{"margin": "1.5rem 0 0.5rem 0 "}} as="h3" color="brand">{constants.OrderName}</Header>
+            <Text key="order-name">{name}</Text>
+            <br key="order-name-br"/>
+            <Header key="destination-title" styles={{"margin": "1.5rem 0 0.5rem 0 "}} as="h3" color="brand">{constants.Destination}</Header>
+            <Text key="destination">{destination}</Text>
         </div>
        );
    }
 
    private getUpdatesTimeline = (historyOrdered: IUpdate[]) => {
     const events: JSX.Element[] = [];
+    let uniqueKeySuffix=0;
     _.forEach(historyOrdered, event => {
         events.push(
-          <Flex.Item>
+          <Flex.Item key={"update"+uniqueKeySuffix}>
               <Flex vAlign="end">
-                  <Text timestamp>{event.sent_at_second}{constants.TimestampUnit}</Text>
-                  {this.getImage(event.event_name)}
-                  <Text>{constants.getFriendlyString(event.event_name)}</Text>
+                  <Text key={"timestamp"+uniqueKeySuffix} timestamp>{event.sent_at_second}{constants.TimestampUnit}</Text>
+                  {this.getImage(event.event_name, uniqueKeySuffix)}
+                  <Text key={"state"+uniqueKeySuffix}>{constants.getFriendlyString(event.event_name)}</Text>
               </Flex>
           </Flex.Item>
         );
-        events.push(<br/>);
+        events.push(<br key={"update-br"+uniqueKeySuffix}/>);
+        uniqueKeySuffix++;
     });
     return events;
    }
 
-    private getImage = (event_name: string) => {
+    private getImage = (event_name: string, uniqueKeySuffix: number) => {
         let image = '../../assets/order-tracker.png';
         switch(event_name) {
             case constants.CreatedEventName:
@@ -95,7 +97,7 @@ export class History extends React.Component <
                 image = '../../assets/order-tracker.png';
                 break;
         }
-        return <Image id="image" src={image} styles={{
+        return <Image key={"image"+uniqueKeySuffix} id="image" src={image} styles={{
             "height": "2rem",
             "margin": "0 0.5rem 0 2rem"
         }}/>;
