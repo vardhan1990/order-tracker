@@ -61,15 +61,15 @@ export class History extends React.Component <
     let uniqueKeySuffix=0;
     _.forEach(historyOrdered, event => {
         events.push(
-          <Flex.Item key={"update"+uniqueKeySuffix}>
+          <Flex.Item key={`update${uniqueKeySuffix}`}>
               <Flex vAlign="end">
-                  <Text key={"timestamp"+uniqueKeySuffix} timestamp>{event.sent_at_second}{constants.TimestampUnit}</Text>
+                  <Text key={`timestamp${uniqueKeySuffix}`} timestamp>{event.sent_at_second}{constants.TimestampUnit}</Text>
                   {this.getImage(event.event_name, uniqueKeySuffix)}
-                  <Text key={"state"+uniqueKeySuffix}>{constants.getFriendlyString(event.event_name)}</Text>
+                  <Text key={`state${uniqueKeySuffix}`}>{constants.getFriendlyString(event.event_name)}</Text>
               </Flex>
           </Flex.Item>
         );
-        events.push(<br key={"update-br"+uniqueKeySuffix}/>);
+        events.push(<br key={`update-br${uniqueKeySuffix}`}/>);
         uniqueKeySuffix++;
     });
     return events;
@@ -97,7 +97,7 @@ export class History extends React.Component <
                 image = '../../assets/order-tracker.png';
                 break;
         }
-        return <Image key={"image"+uniqueKeySuffix} id="image" src={image} styles={{
+        return <Image key={`image${uniqueKeySuffix}`} id="image" src={image} styles={{
             "height": "2rem",
             "margin": "0 0.5rem 0 2rem"
         }}/>;
