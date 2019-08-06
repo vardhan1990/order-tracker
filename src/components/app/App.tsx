@@ -33,10 +33,13 @@ export class App extends React.Component<
   public componentDidMount() {
     emitReadyEventOnSocket(
       (newUpdates: any) => {
-          _.forEach(newUpdates, newUpdate =>
-            this.setState({
-              newUpdate: newUpdate as IUpdate
-            })
+          _.forEach(newUpdates, newUpdate => {
+              const update = newUpdate as IUpdate;
+              if(!update) return;
+              this.setState({
+                newUpdate: update
+              })
+            }
           );
         },
       (clockTick: any) =>
@@ -82,14 +85,16 @@ export class App extends React.Component<
   }
 
   private sendUpdateFn = (id: string, name: string, destination: string, event_name: constants.EventNameType) => {
+    const newUpdate = {
+      id,
+      name,
+      destination,
+      event_name,
+      sent_at_second: this.state.timeInSeconds
+    } as IUpdate;
+    if (!newUpdate) {return;}
     this.setState({
-      newUpdate: {
-        id,
-        name,
-        destination,
-        event_name,
-        sent_at_second: this.state.timeInSeconds
-      }
+      newUpdate
     });
   }
 }

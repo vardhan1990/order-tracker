@@ -12,7 +12,7 @@ describe("Dashboard", () => {
     const getCurrentTimeFn = () => {
       return 1;
     };
-  
+
     const sendUpdateFn = (id: string, name: string, destination: string, event_name: constants.EventNameType) => {};
 
     const div = document.createElement('div');
@@ -33,7 +33,7 @@ describe("Dashboard", () => {
   it(`expect 14 headers`, () => {
     expect(wrapper.find('Header').length).toBe(14);
   });
-  
+
   it(`expect 1 accordion`, () => {
     expect(wrapper.find('Accordion').length).toBe(1);
   });

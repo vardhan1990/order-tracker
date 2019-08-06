@@ -27,7 +27,7 @@ describe("Update", () => {
       </Provider>
     , div);
   });
-  
+
   it('renders without crashing', () => {});
 
   it('rendered element is defined', () => {
@@ -41,7 +41,7 @@ describe("Update", () => {
   it(`expect 1 button`, () => {
     expect(wrapper.find('Button').length).toBe(1);
   });
-  
+
   it(`expect 1 dialog`, () => {
     expect(wrapper.find('Dialog').length).toBe(1);
   });
