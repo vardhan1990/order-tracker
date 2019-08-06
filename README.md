@@ -12,6 +12,8 @@ Run `yarn start`.
 
 Navigate to `localhost:3000` to interact with the app.
 
+A service was developed to simulate the incoming orders, and works seamlessly with this web app. Details can be found here: https://github.com/vardhan1990/order-tracker-sim-service
+
 ### Quality
 
 Run `yarn lint` to ensure all files meet ilnting requirements.
