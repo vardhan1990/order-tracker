@@ -34,29 +34,7 @@ export class Card extends React.Component<
     };
 
     private getImage = () => {
-        const { event_name } = this.props;
-        let image = '../../assets/order-tracker.png';
-        switch(event_name) {
-            case constants.CreatedEventName:
-                image = '../../assets/created.png';
-                break;
-            case constants.CookedEventName:
-                image = '../../assets/cooked.png';
-                break;
-            case constants.CancelledEventName:
-                image = '../../assets/cancelled.png';
-                break;
-            case constants.DriverReceivedEventName:
-                image = '../../assets/driver_received.png';
-                break;
-            case constants.DeliveredEventName:
-                image = '../../assets/order-tracker-icon.png';
-                break;
-            default:
-                image = '../../assets/order-tracker.png';
-                break;
-        }
-        return <Image id="image" src={image} styles={{
+        return <Image id="image" src={constants.getImage(this.props.event_name)} styles={{
             "height": "2rem"
         }}/>;
     }

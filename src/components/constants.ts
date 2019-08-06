@@ -1,3 +1,10 @@
+import CreatedIcon from '../assets/created.png';
+import CookedIcon from '../assets/cooked.png';
+import CancelledIcon from '../assets/cancelled.png';
+import DeliveredIcon from '../assets/delivered.png';
+import DriverReceivedIcon from '../assets/driver_received.png';
+import OrderTrackerIcon from '../assets/order_tracker_icon.png';
+
 // App
 export const AppTitle = "Order Tracker";
 export const ClockHeader = "Clock";
@@ -68,4 +75,29 @@ export const getFriendlyString = (event_name: string) => {
         default:
             return UnknownEventFriendlyString;
     }
+}
+
+export const getImage = (event_name: string) => {
+    let image;
+    switch(event_name) {
+        case CreatedEventName:
+            image = CreatedIcon;
+            break;
+        case CookedEventName:
+            image = CookedIcon;
+            break;
+        case CancelledEventName:
+            image = CancelledIcon;
+            break;
+        case DriverReceivedEventName:
+            image = DriverReceivedIcon;
+            break;
+        case DeliveredEventName:
+            image = DeliveredIcon;
+            break;
+        default:
+            image = OrderTrackerIcon;
+            break;
+    }
+    return image;
 }

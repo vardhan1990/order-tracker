@@ -76,28 +76,7 @@ export class History extends React.Component <
    }
 
     private getImage = (event_name: string, uniqueKeySuffix: number) => {
-        let image = '../../assets/order-tracker.png';
-        switch(event_name) {
-            case constants.CreatedEventName:
-                image = '../../assets/created.png';
-                break;
-            case constants.CookedEventName:
-                image = '../../assets/cooked.png';
-                break;
-            case constants.CancelledEventName:
-                image = '../../assets/cancelled.png';
-                break;
-            case constants.DriverReceivedEventName:
-                image = '../../assets/driver_received.png';
-                break;
-            case constants.DeliveredEventName:
-                image = '../../assets/order-tracker-icon.png';
-                break;
-            default:
-                image = '../../assets/order-tracker.png';
-                break;
-        }
-        return <Image key={`image${uniqueKeySuffix}`} id="image" src={image} styles={{
+        return <Image key={`image${uniqueKeySuffix}`} id="image" src={constants.getImage(event_name)} styles={{
             "height": "2rem",
             "margin": "0 0.5rem 0 2rem"
         }}/>;

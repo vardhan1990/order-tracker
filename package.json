@@ -57,6 +57,9 @@
     "transform": {
       "\\.(ts|tsx)$": "babel-jest"
     },
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif)$": "<rootDir>/src/mocks/fileMock.ts"
+    },
     "setupFiles": [
       "raf/polyfill"
     ],
