@@ -33,4 +33,21 @@ describe("Update", () => {
   it('rendered element is defined', () => {
     expect(wrapper).toBeDefined();
   });
+
+  it('rendered element is defined', () => {
+    expect(wrapper).toBeDefined();
+  });
+
+  it(`expect 1 button`, () => {
+    expect(wrapper.find('Button').length).toBe(1);
+  });
+  
+  it(`expect 1 dialog`, () => {
+    expect(wrapper.find('Dialog').length).toBe(1);
+  });
+
+  it(`update id prop to empty string doesn't crash`, () => {
+    wrapper.setProps({id:""});
+    wrapper.update();
+  });
 });
