@@ -4,7 +4,7 @@ import { Cards } from './cards';
 import { IUpdate } from '../../update.interface';
 import { Provider, themes } from '@stardust-ui/react';
 
-describe("Card", () => {
+describe("Cards", () => {
   const updates: IUpdate[] = [{
     id: "id",
     name: "string",
