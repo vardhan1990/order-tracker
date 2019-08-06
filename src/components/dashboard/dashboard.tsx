@@ -170,19 +170,22 @@ export class Dashboard extends React.Component<
   private getPanel = (eventName: string) => {
     const header = constants.getFriendlyString(eventName);
     return {
-      title: this.getTitle(header),
+      key: eventName,
+      title: this.getTitle(eventName, header),
       content: this.getCards(eventName)
     };
   }
 
-  private getTitle = (title: string) => {
-    return <Header color="brand" as="h3">{title}</Header>;
+  private getTitle = (eventName: string, title: string) => {
+    const key = eventName+'_title';
+    return <Header key={key} color="brand" as="h3">{title}</Header>;
   }
 
-  private getCards = (eventNameContentFilter: string) => {
+  private getCards = (eventName: string) => {
+    const key = eventName+'_cards';
     return (
-      <Cards content={this.getLatestStateOfOrdersFiltered().filter(
-        update => update.event_name === eventNameContentFilter)} />
+      <Cards key={key} content={this.getLatestStateOfOrdersFiltered().filter(
+        update => update.event_name === eventName)} />
     );
   }
 }
