@@ -1,5 +1,4 @@
 import React from 'react';
-import './card.css';
 import CreatedIcon from '../../assets/created.png';
 import CookedIcon from '../../assets/cooked.png';
 import CancelledIcon from '../../assets/cancelled.png';
@@ -16,7 +15,12 @@ export class Card extends React.Component<
 > {
     public render() {
         return (
-            <Flex id='card' column gap="gap.medium" padding="padding.medium">
+            <Flex id='card' column gap="gap.medium" padding="padding.medium" styles={{
+                    "margin": "0 2rem 2rem 0",
+                    "width": "500px",
+                    "height": "250px",
+                    "background-color": "white"
+                }}>
                 <Flex.Item>
                     {this.getHeader()}
                 </Flex.Item>
@@ -66,7 +70,10 @@ export class Card extends React.Component<
                 image = OrderTrackerIcon;
                 break;
         }
-        return <Image id="image" src={image} />;
+        return <Image id="image" src={image} styles={{
+            "width": "60px",
+            "height": "60px"
+        }}/>;
     }
 
     private getContent = () => {
