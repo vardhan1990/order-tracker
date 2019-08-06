@@ -65,7 +65,7 @@ export class History extends React.Component <
               <Flex vAlign="end">
                   <Text key={`timestamp${uniqueKeySuffix}`} timestamp>{event.sent_at_second}{constants.TimestampUnit}</Text>
                   {this.getImage(event.event_name, uniqueKeySuffix)}
-                  <Text key={`state${uniqueKeySuffix}`}>{constants.getFriendlyString(event.event_name)}</Text>
+                  <Text key={`state${uniqueKeySuffix}`}>{event.event_name}</Text>
               </Flex>
           </Flex.Item>
         );
