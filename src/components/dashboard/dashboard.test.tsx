@@ -3,7 +3,7 @@ import { mount, ReactWrapper } from 'enzyme';
 import { Dashboard } from './dashboard';
 import { Provider, themes } from '@stardust-ui/react';
 import * as constants from '../constants';
-import { Accordion, Button, Flex, Header, Input, Text } from '@stardust-ui/react';
+import { IUpdate } from '../../update.interface';
 
 describe("Dashboard", () => {
   let wrapper: ReactWrapper;
@@ -28,5 +28,19 @@ describe("Dashboard", () => {
 
   it('rendered element is defined', () => {
     expect(wrapper).toBeDefined();
+  });
+
+  it(`setting props doesn't crash`, () => {
+    const update: IUpdate = {
+      id: "id",
+      name: "string",
+      event_name: "CREATED",
+      sent_at_second: 1,
+      destination: "string"
+    };
+
+    wrapper.setProps({
+      newupdate: {...update}
+    });
   });
 });
