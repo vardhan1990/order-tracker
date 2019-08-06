@@ -59,7 +59,7 @@
     "setupFiles": [
       "raf/polyfill"
     ],
-    "testRegex": ".*\\.test\\.(js|ts|tsx)?$",
+    "testRegex": ".*\\.test\\.(ts|tsx)?$",
     "setupFilesAfterEnv": [
       "<rootDir>src/setupTests.ts"
     ]
