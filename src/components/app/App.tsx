@@ -6,7 +6,6 @@ import React from 'react';
 import { Divider, Header, Flex } from '@stardust-ui/react';
 import { emitReadyEventOnSocket } from '../../web-api/api';
 
-import './App.css';
 
 interface IAppState {
   newUpdate: IUpdate;
@@ -49,13 +48,19 @@ export class App extends React.Component<
 
   public render() {
     return (
-      <div id="app">
+      <Flex column styles={{
+          "padding": "0 2rem 0 2rem",
+          "background-color": "#edebe9"
+        }}>
         <Flex space="between">
           <Header
             id="header"
             as="h1"
             color="brand"
             content={constants.AppTitle}
+            styles={{
+              "margin": "0 0 0 0"
+            }}
           />
           <Header
             id="header"
@@ -67,7 +72,7 @@ export class App extends React.Component<
         <Divider color="brand" size={0}/>
         <Dashboard getCurrentTime={() => this.state.timeInSeconds} newUpdate={this.state.newUpdate}
                 sendUpdateFn={this.sendUpdateFn.bind(this)} />
-      </div>
+      </Flex>
     );
   }
 

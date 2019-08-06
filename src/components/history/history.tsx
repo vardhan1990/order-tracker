@@ -64,12 +64,11 @@ export class History extends React.Component <
     const events: JSX.Element[] = [];
     _.forEach(historyOrdered, event => {
         events.push(
-          <Flex.Item hAlign="center" vAlign="center">
-              <Flex hAlign="center" vAlign="center">
+          <Flex.Item>
+              <Flex vAlign="end">
+                  <Text>event.sent_at_second}{constants.TimestampUnit}</Text>
                   {this.getImage(event.event_name)}
-                  <Text>
-                    {constants.getFriendlyString(event.event_name)} at {event.sent_at_second}{constants.TimestampUnit}
-                  </Text>
+                  <Text>{constants.getFriendlyString(event.event_name)}</Text>
               </Flex>
           </Flex.Item>
         );
@@ -100,6 +99,9 @@ export class History extends React.Component <
                 image = OrderTrackerIcon;
                 break;
         }
-        return <Image id="image" src={image} />;
+         return <Image id="image" src={image} styles={{
+            "height": "2rem",
+            "margin": "0 0.5rem 0 2rem"
+        }}/>;
     }
 }
