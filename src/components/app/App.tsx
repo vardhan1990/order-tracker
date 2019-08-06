@@ -54,18 +54,23 @@ export class App extends React.Component<
         }}>
         <Flex space="between">
           <Header
-            id="header"
             as="h1"
             color="brand"
+            align="center"
             content={constants.AppTitle}
             styles={{
-              "margin": "0 0 0 0"
+              "margin": "0 0 0 0",
+              "padding": "0 0 0 0"
             }}
           />
           <Header
-            id="header"
             as="h1"
+            align="center"
             color="brand"
+            styles={{
+              "margin": "0 0 0 0",
+              "padding": "0 0 0 0"
+            }}
             content={`${constants.ClockHeader}: ${this.state.timeInSeconds}${constants.TimestampUnit}`}
           />
         </Flex>
