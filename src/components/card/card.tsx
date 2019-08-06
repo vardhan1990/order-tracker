@@ -1,10 +1,4 @@
 import React from 'react';
-import CreatedIcon from '../../assets/created.png';
-import CookedIcon from '../../assets/cooked.png';
-import CancelledIcon from '../../assets/cancelled.png';
-import DeliveredIcon from '../../assets/delivered.png';
-import DriverReceivedIcon from '../../assets/driver_received.png';
-import OrderTrackerIcon from '../../assets/order_tracker_icon.png';
 import * as constants from '../constants';
 import { Flex, Header, Image, Text } from '@stardust-ui/react';
 import { IUpdate } from '../../update.interface';
@@ -41,25 +35,25 @@ export class Card extends React.Component<
 
     private getImage = () => {
         const { event_name } = this.props;
-        let image;
+        let image = '../../assets/order-tracker.png';
         switch(event_name) {
             case constants.CreatedEventName:
-                image = CreatedIcon;
+                image = '../../assets/created.png';
                 break;
             case constants.CookedEventName:
-                image = CookedIcon;
+                image = '../../assets/cooked.png';
                 break;
             case constants.CancelledEventName:
-                image = CancelledIcon;
+                image = '../../assets/cancelled.png';
                 break;
             case constants.DriverReceivedEventName:
-                image = DriverReceivedIcon;
+                image = '../../assets/driver_received.png';
                 break;
             case constants.DeliveredEventName:
-                image = DeliveredIcon;
+                image = '../../assets/order-tracker-icon.png';
                 break;
             default:
-                image = OrderTrackerIcon;
+                image = '../../assets/order-tracker.png';
                 break;
         }
         return <Image id="image" src={image} styles={{

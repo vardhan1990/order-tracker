@@ -4,13 +4,6 @@ import React from 'react';
 import { Button, Dialog, Header, Image, Flex, Text } from '@stardust-ui/react';
 import { IUpdate } from '../../update.interface';
 
-import CreatedIcon from '../../assets/created.png';
-import CookedIcon from '../../assets/cooked.png';
-import CancelledIcon from '../../assets/cancelled.png';
-import DeliveredIcon from '../../assets/delivered.png';
-import DriverReceivedIcon from '../../assets/driver_received.png';
-import OrderTrackerIcon from '../../assets/order_tracker_icon.png';
-
 export interface IHistoryProps {
     allUpdatesOfAllOrdersUnfiltered: IUpdate[];
     id: string;
@@ -81,28 +74,28 @@ export class History extends React.Component <
    }
 
     private getImage = (event_name: string) => {
-        let image;
+        let image = '../../assets/order-tracker.png';
         switch(event_name) {
             case constants.CreatedEventName:
-                image = CreatedIcon;
+                image = '../../assets/created.png';
                 break;
             case constants.CookedEventName:
-                image = CookedIcon;
+                image = '../../assets/cooked.png';
                 break;
             case constants.CancelledEventName:
-                image = CancelledIcon;
+                image = '../../assets/cancelled.png';
                 break;
             case constants.DriverReceivedEventName:
-                image = DriverReceivedIcon;
+                image = '../../assets/driver_received.png';
                 break;
             case constants.DeliveredEventName:
-                image = DeliveredIcon;
+                image = '../../assets/order-tracker-icon.png';
                 break;
             default:
-                image = OrderTrackerIcon;
+                image = '../../assets/order-tracker.png';
                 break;
         }
-         return <Image id="image" src={image} styles={{
+        return <Image id="image" src={image} styles={{
             "height": "2rem",
             "margin": "0 0.5rem 0 2rem"
         }}/>;
