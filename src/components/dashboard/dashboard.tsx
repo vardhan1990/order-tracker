@@ -177,12 +177,12 @@ export class Dashboard extends React.Component<
   }
 
   private getTitle = (eventName: string, title: string) => {
-    const key = eventName+'_title';
+    const key = `${eventName}_title`;
     return <Header key={key} color="brand" as="h3">{title}</Header>;
   }
 
   private getCards = (eventName: string) => {
-    const key = eventName+'_cards';
+    const key = `${eventName}_cards`;
     return (
       <Cards key={key} content={this.getLatestStateOfOrdersFiltered().filter(
         update => update.event_name === eventName)} />
