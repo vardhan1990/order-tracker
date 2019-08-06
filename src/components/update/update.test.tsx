@@ -33,20 +33,4 @@ describe("Update", () => {
   it('rendered element is defined', () => {
     expect(wrapper).toBeDefined();
   });
-
-  it(`setting props doesn't crash`, () => {
-    const latestUpdate: IUpdate[] = [{
-      id: "newId",
-      name: "string",
-      event_name: "CREATED",
-      sent_at_second: 1,
-      destination: "string"
-    }];
-
-
-    wrapper.setProps({
-      latestUpdate: {latestUpdate},
-      id: 'newId'
-    });
-  });
 });

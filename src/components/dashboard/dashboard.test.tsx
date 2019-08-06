@@ -11,9 +11,9 @@ describe("Dashboard", () => {
   beforeEach(() => {
     const getCurrentTimeFn = () => {
       return 1;
-   };
- 
-   const sendUpdateFn = (id: string, name: string, destination: string, event_name: constants.EventNameType) => {};
+    };
+  
+    const sendUpdateFn = (id: string, name: string, destination: string, event_name: constants.EventNameType) => {};
 
     const div = document.createElement('div');
 
@@ -30,17 +30,19 @@ describe("Dashboard", () => {
     expect(wrapper).toBeDefined();
   });
 
-  it(`setting props doesn't crash`, () => {
-    const update: IUpdate = {
-      id: "id",
-      name: "string",
-      event_name: "CREATED",
-      sent_at_second: 1,
-      destination: "string"
-    };
+  it(`expect 14 headers`, () => {
+    expect(wrapper.find('Header').length).toBe(14);
+  });
+  
+  it(`expect 1 accordion`, () => {
+    expect(wrapper.find('Accordion').length).toBe(1);
+  });
 
-    wrapper.setProps({
-      newupdate: {...update}
-    });
+  it(`expect 3 buttons`, () => {
+    expect(wrapper.find('Button').length).toBe(3);
+  });
+
+  it(`expect 3 inputs`, () => {
+    expect(wrapper.find('Input').length).toBe(3);
   });
 });
