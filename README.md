@@ -18,7 +18,7 @@ Run `yarn lint` to ensure all files meet ilnting requirements.
 
 Run `yarn test` to run tests.
 
-Run `yarn test: coverage` to get test coverage stats.
+Run `yarn test:coverage` to get test coverage stats.
 
 ## Technologies used
 
