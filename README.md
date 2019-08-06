@@ -28,7 +28,7 @@ To develop a web app, Typescript provides the benefits of object oriented progra
 
 ### React 
 
-For a web app that needs many real-time updates, React is a great technology choice since it is optimized for faster and efficient rendering with the help of the internal ReactDOM. For that reason, this project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
+For a web app that needs many real-time updates, React is a great technology choice since it is optimized for faster and efficient rendering with the help of the internal ReactDOM. For that reason, React was the preference. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
 
 ### Stardust UI
 
