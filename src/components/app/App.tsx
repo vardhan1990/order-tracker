@@ -35,10 +35,10 @@ export class App extends React.Component<
       (newUpdates: any) => {
           _.forEach(newUpdates, newUpdate => {
               const update = newUpdate as IUpdate;
-              if(!update) return;
+              if(!update) {return;}
               this.setState({
                 newUpdate: update
-              })
+              });
             }
           );
         },
